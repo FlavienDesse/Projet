@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta http-equiv="content-type" content="text/html"; >
+<meta charset="UTF-8">
+<title>Stegano</title>
+<link rel="stylesheet" type="text/css" href="Ficher_Principal.css" />
+</head>
+
+
+<body>
+ <a id="page_principal" href="Page_Principal.html" target="_parent"> <img src="Home-512.png"  > </img> </a>
+ 
+ 
+ <div id="titre" class="titre" style="display:none;"> <!-- Le titre des etapes --> 
+ </div>
+
+ <div id="Etape" class="Etape" style="display:none;"> 
+ </div>
+ 
+
+ <div id="Upload" class="Upload" style="display:none;" >
+   <input id="file" type="file" onchange="onChange(this)">
+ </div>
+
+ <canvas id="monCanvas" style="display:none;"> </canvas>
+
+ <textarea id="texte" rows=10 cols=50 style="display:none;" onchange="LeChangementCMaintenant()">
+ </textarea >
+
+
+
+
+ <div id="Write" style="display:none;" > Vous pouvez choisir si le texte sera codé a l'envers le texte sera codé dans l'image de droite a gauche au lieu de gauche a droite :
+   <select name="Liste" id="InverseListe" >
+    <option value="NonInverse" onclick="inverseoupas()">Non Inverse</option>
+    <option value="Inverse" onclick="inverseoupas()">Inverse</option> 
+  </select>
+
+  
+  <br>
+</div>
+
+<p id="Debut" style="display:none;">
+ <font id="maxPixel"> </font> ) 
+ <input id="Commencement" value="" maxlength="50" type="text" onkeyup="actualiser_maxpixel()" > </input>
+ <br> En outre le pixel sur lequel sera codé le message sera le pixel <font id="Pixelchoisi"> </font>
+</p>
+
+<input id="Recommencer" value="Recommencer" type="button" onclick="javascript:location.reload();" style="display:none;"> </input>
+<div id="suivante">
+  <input class= "Suivante" value="Etape Suivante" onclick="passer_1()" maxlength="110" type="button" id="Suivante_1"  style="display:none;">
+  <input class= "Suivante" value="Etape Suivante" onclick="passer_2()" maxlength="110" type="button" id="Suivante_2"  style="display:none;">
+  <input class= "Suivante" value="Etape Suivante" onclick="passer_3()" maxlength="110" type="button" id="Suivante_3"  style="display:none;">
+  <input class= "Suivante" value="Etape Suivante" onclick="passer_4()" maxlength="110" type="button" id="Suivante_4"  style="display:none;">
+</div>
+
+<div id="probleme" >
+</div>
+
+
+
+
+
+
+<div id="explication" class="premiere_page" >
+  
+
+
+  
+ 
+  
+  
+  <center><strong><big>Stéganographie : </big></strong></center>
+  <br>
+  <br>
+  <h1>
+    Ceci est un programme permettant de cacher un message dans une autre image  ( en 7 bits )
+    <br>
+    <br>
+    Si vous voulez des explications sur le fonctionnement du programme cliqué  <a href="Explication_Steganographie_texte.html"  target="_blank"> ici </a>
+    <br>
+
+
+    <input value="C'est parti !" onclick="Etape_1()" maxlength="11" type="button" id="parti" >
+
+  </h1>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+//Pour cacher le message il suffit juste de prendre  une valeur d'un pixel , ensuite il faut faire un message le convertir en 
+ // binaire , ensuite on prend la valeur du pixel choisi on regarde si il est pair ou impair , si la premiere valeur du pixel choisi
+ // est impair et que le premier bit de la premiere lettre du texte vaut 1 alors on ne change rien  , on prend le second bit 
+ // de la premiere lettre on regarde si elle vaut 1 ou 0 ensuite on regarde la même valeur du pixel mais sur le pixel suivant
+// et si elle vaut 250 et que le bit du texte vaut 1 alors on modifie sa valeur en un ect ect ect 
+// A la fin notre message sera codé sur le bit de poid faible de plein de valeur d'un pixel 
+
+
+
+
+ // Je déclare ce qui est nécessaire a la création du canvas 
+ // allowedtypes c'est pour définir les extensions autorisé
+ const allowedTypes = ["image/png", "image/jpg", "image/jpeg", "image/gif"];     
+ var canvas = document.getElementById("monCanvas");
+ var ctx = canvas.getContext("2d");
+
+//Ici je déclare toutes les variables 
+var Etape = 0
+var texte = ""
+document.getElementById("texte").value = ""
+var mop = ""
+var PixelsImage = []
+var Utilisateur_max_pixel_demande=0
+document.getElementById("Commencement").value=""
+var nombremaxpixel = 0
+
+texte = []
+texte_en_binaire_secondaire =[]
+texte_en_binaire_primaire = []
+texte_en_decimal = []
+
+
+var a=0
+var b=0
+var x=0
+var c=0
+
+
+image_en_decimal=[]
+image_en_binaire_primaire=[]
+image_en_binaire_secondaire=[]
+mop=[]
+
+inverse_ou_pas_choisi=""
+
+// Ca ca permet d'afficher toutes l'etape 1 avec le bouton le titre ect
+function Etape_1 (){
+  document.getElementById("Suivante_1").style.display="block";
+  document.getElementById("explication").style.display="none";
+  document.getElementById("monCanvas").style.display="block";
+  document.getElementById("titre").style.display="block";
+  document.getElementById("titre").innerHTML="Etape 1"
+  document.getElementById("Etape").style.display="block";
+  document.getElementById("Etape").innerHTML="Ici , vous devez simplement choisir l'image dans laquel vous voulez que le texte soit introduit  "
+  document.getElementById("Upload").style.display="block"
+}
+
+//Idem ca permet d'afficher toute l'etape 2
+function Etape_2() {
+  document.getElementById("probleme").innerHTML = ""
+  document.getElementById("Suivante_1").style.display="none"
+  document.getElementById("Suivante_2").style.display="block"
+  document.getElementById("titre").innerHTML="Etape 2"
+  document.getElementById("monCanvas").style.display="none";
+  document.getElementById("Etape").innerHTML="Ici , vous devez rentrer le texte dans lequel vous voulez qu'il soit intégrer dans l'image"
+  document.getElementById("Upload").style.display="none"
+  document.getElementById("texte").style.display="block"
+}
+
+// Idem
+function Etape_3() {
+  document.getElementById("Suivante_2").style.display="none"
+  document.getElementById("Suivante_3").style.display="block"
+  document.getElementById("titre").innerHTML="Etape 3"
+  document.getElementById("Etape").innerHTML="Ici , vous devez choisir comment le texte sera intégré dans l'image"
+  document.getElementById("texte").style.display="none"
+  document.getElementById("probleme").innerHTML = ""
+  document.getElementById("Debut").style.display="block"
+  document.getElementById("Write").style.display="block"
+  inverseoupas()
+}
+
+
+//Idem
+function Etape_4 (){
+  document.getElementById("Suivante_2").style.display="none"
+  document.getElementById("Suivante_3").style.display="block"
+  document.getElementById("titre").innerHTML="Etape 4"
+  document.getElementById("Etape").innerHTML="Voila , vous avez finis , si vous êtes satisfait du résultat vous pouvez enregistrer l'image ou recommencer "
+  document.getElementById("probleme").innerHTML = ""
+  document.getElementById("Debut").style.display="none"
+  document.getElementById("Write").style.display="none"
+  document.getElementById("Suivante_3").style.display="none"
+  document.getElementById("monCanvas").style.display="block";
+  document.getElementById("Recommencer").style.display="block";
+}
+
+
+// Ca ca permet que dés que l'utilisateur entre le pixel choisi que ca actualise de une le pixel demandé pour
+// Dire a l'utilisateur sur quel pixel son message sera codé 
+function actualiser_maxpixel() {
+
+  Utilisateur_max_pixel_demande = document.getElementById("Commencement").value
+
+
+
+// le " % " permet de trouver le reste de la division , ici par 4 , et je cherche le reste de la division par 4 car on retrouver
+// un même motif tous les 4 pixels
+// et si le reste est 0 ca correspon au pixel rouge ect
+// Le "if" long permet de vérifier si aucun probléme n'est détécté , on peux largement otpimisé mais ca fonctionne 
+// Donc voila :D
+if (Utilisateur_max_pixel_demande%4 == 0 && Utilisateur_max_pixel_demande!="" && ((Utilisateur_max_pixel_demande < nombremaxpixel && inverse_ou_pas_choisi=="NonInverse" ) || (inverse_ou_pas_choisi=="Inverse" && Utilisateur_max_pixel_demande > nombremaxpixel))){
+  document.getElementById("probleme").innerHTML=""
+  c=parseFloat(document.getElementById("Commencement").value)
+  document.getElementById("Pixelchoisi").innerHTML="Rouge"
+  document.getElementById("Pixelchoisi").style.color="red"
+  if (inverse_ou_pas_choisi=="Inverse"){
+
+  }
+}
+else if (Utilisateur_max_pixel_demande%4 == 1 && Utilisateur_max_pixel_demande!="" && ((Utilisateur_max_pixel_demande < nombremaxpixel && inverse_ou_pas_choisi=="NonInverse" ) || (inverse_ou_pas_choisi=="Inverse" && Utilisateur_max_pixel_demande > nombremaxpixel))){
+  document.getElementById("probleme").innerHTML=""
+  c=parseFloat(document.getElementById("Commencement").value)
+  document.getElementById("Pixelchoisi").innerHTML="Vert"
+  document.getElementById("Pixelchoisi").style.color="green"
+  if (inverse_ou_pas_choisi=="Inverse"){
+
+  }
+}
+else if (Utilisateur_max_pixel_demande%4 == 2 && Utilisateur_max_pixel_demande!=""&& ((Utilisateur_max_pixel_demande < nombremaxpixel && inverse_ou_pas_choisi=="NonInverse" ) || (inverse_ou_pas_choisi=="Inverse" && Utilisateur_max_pixel_demande > nombremaxpixel))){
+  document.getElementById("probleme").innerHTML=""
+  c=parseFloat(document.getElementById("Commencement").value)
+  document.getElementById("Pixelchoisi").innerHTML="Bleu"
+  document.getElementById("Pixelchoisi").style.color="blue"
+  if (inverse_ou_pas_choisi=="Inverse"){
+
+  }
+}
+else if (Utilisateur_max_pixel_demande%4 == 3 && Utilisateur_max_pixel_demande!="" && ((Utilisateur_max_pixel_demande < nombremaxpixel && inverse_ou_pas_choisi=="NonInverse" ) || (inverse_ou_pas_choisi=="Inverse" && Utilisateur_max_pixel_demande > nombremaxpixel))){
+  document.getElementById("probleme").innerHTML=""
+  c=parseFloat(document.getElementById("Commencement").value)
+  document.getElementById("Pixelchoisi").innerHTML="Opacité"
+  document.getElementById("Pixelchoisi").style.color="orange"
+  if (inverse_ou_pas_choisi=="Inverse"){
+
+  }
+}
+
+// Affiche les divers problèmes 
+
+
+
+}
+
+
+
+
+// Dés qu'on appuis sur le bouton " Etape suivante "
+
+function passer_1() {
+  if (Etape == 1 ) {
+    Etape_2 ()
+  }
+  else   {
+    document.getElementById("probleme").style.color="red"
+    document.getElementById("probleme").innerHTML = "Veuillez uploader une image avant"
+  }
+}
+
+
+function passer_2(){
+  if (texte == "" ){
+    document.getElementById("probleme").style.color="red"
+    document.getElementById("probleme").innerHTML = "La zone de texte n'est pas rempli "
+  }
+  else if (texte != "" ) {
+    Etape_3 ()
+  }
+}
+
+
+function passer_3 (){
+
+  if ((Utilisateur_max_pixel_demande > nombremaxpixel && inverse_ou_pas_choisi=="NonInverse" ) || (inverse_ou_pas_choisi=="Inverse" && Utilisateur_max_pixel_demande <= nombremaxpixel) || isNaN(Utilisateur_max_pixel_demande)== true || Utilisateur_max_pixel_demande==""){
+    document.getElementById("probleme").style.color="red"
+    document.getElementById("probleme").innerHTML = "Impossible de continuer , vous avez omni une régles"
+  }
+  else {
+
+    go()
+  }
+
+}
+
+
+
+
+
+
+
+
+
+// La ca cree et cache le message dans l'image dés qu'on appuie sur le bouton
+
+function go () {
+
+for (i=0 ; i <texte.length ; i++) {                                              //Ici je met le texte en decimal
+  texte_en_decimal.push(texte.charCodeAt(i))
+}
+
+
+for (i=0 ; i <texte.length ; i++) {                                              //Ici je met le texte en binaire grâce au decimal
+  texte_en_binaire_secondaire=nombretobinaire(texte_en_decimal[i])
+
+  for (p=0 ; p<7 ;p++){
+texte_en_binaire_primaire.push(texte_en_binaire_secondaire[p])                    //Ici ca permet de convertir 1000001 en 1,0,0,0, .. 
+}                                                                                 //ex si i = 1 au lieu de m'afficher 1000001 il va m'afficher 1
+}
+
+
+
+for (i=0; i<texte.length*7;i++  ) {
+ //Si le reste de lune valeur du pixel est différent de celui du bit d'une lettre alors il faut le changer 
+ // le % permet d'avoir le reste de la division , ici par 2 
+ if(PixelsImage.data[c]%2 !== texte_en_binaire_primaire[i] ) {
+// Ici comme un pixel ne peut être codé en 256 , je dit que si le pixel doit changer et qui vaut 255 il prendra une valeur inférieur de 1 
+if (PixelsImage.data[c] == 255) {
+  PixelsImage.data[c] = PixelsImage.data[c] -1
+}
+else{
+  PixelsImage.data[c] = PixelsImage.data[c] +1
+}
+}
+
+
+
+// Ici si l'utilisateur choisi inverse le programme va juste allé a reculons donc "c" correspond a une valeur du pixel 
+if(inverse_ou_pas_choisi=="Inverse"){
+  c=c-4
+}
+if(inverse_ou_pas_choisi=="NonInverse"){
+  c=c+4
+}
+
+
+}
+// Permet d'implanter les Pixels qu'on a précedemment changer dans le canvas
+ctx.putImageData(PixelsImage,0,0);
+//Etape_() permet juste de lancer la function etape_4
+Etape_4 ()
+}
+
+
+
+
+// Binaire cqfd
+function  nombretobinaire(nb){
+  var quotient=nb;
+  var liste=[0,0,0,0,0,0,0];
+  for (var i=0; i<7;i++){
+    liste[6-i]=quotient % 2;
+    quotient=(quotient-quotient % 2)/2;
+  }
+  return liste;
+}
+
+//Cree le canvas par rapport a l'upload
+
+function onChange(sender)
+{
+ 
+  
+  var file = sender.files[0];
+  var fileType = file["type"];
+  if(allowedTypes.indexOf(fileType) == -1)
+  {
+    alert("Format du fichier invalide. Les formats acceptés sont : gif, jpeg, png. ");
+  }
+  else
+  {
+    var reader = new FileReader();
+    reader.onload = function(e)
+    {
+      var img = new Image();
+      img.src = e.target.result;
+      img.onload = function()
+      {
+        ctx.canvas.width = img.width;
+        ctx.canvas.height = img.height;
+        canvas.style.maxWidth = '800px';
+        canvas.style.maxHeight = '600px';
+        ctx.drawImage(img, 0, 0);
+        PixelsImage = ctx.getImageData(0, 0, img.width, img.height);
+        canvas.style.borderStyle="ridge ridge ridge ridge" ;
+        ctx.putImageData(PixelsImage, 0, 0);
+      }
+    };
+    reader.readAsDataURL(file);
+    
+  }
+  Etape = 1
+
+}
+
+
+function LeChangementCMaintenant () {
+  texte = document.getElementById("texte").value
+}
+
+function inverseoupas() {
+  inverse_ou_pas_choisi= document.getElementById("InverseListe").options[document.getElementById('InverseListe').selectedIndex].value;
+  if(inverse_ou_pas_choisi=="Inverse"){
+    nombremaxpixel=4*(7*texte.length)
+    document.getElementById("maxPixel").innerHTML="Ici vous devez rentrer le pixel de départ : (le pixel minimum autorisé est " + nombremaxpixel
+    actualiser_maxpixel()
+  }
+  if (inverse_ou_pas_choisi=="NonInverse"){
+    nombremaxpixel=PixelsImage.data.length - 4*(7*texte.length)
+    document.getElementById("maxPixel").innerHTML="Ici vous devez rentrer le pixel de départ : (le pixel maximum autorisé est " + nombremaxpixel 
+    actualiser_maxpixel()
+  }
+}
+</script>
+</body></html>

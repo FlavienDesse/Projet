@@ -1,0 +1,381 @@
+﻿
+
+span {
+padding-left:10px;
+font-size : 30px;
+}
+TABLE{
+margin-left:auto;
+margin-right:auto;	
+	
+}
+
+.textarea_cryptage{
+max-width:500px;
+max-height:200px;	
+min-width:100px;
+max-height:50px;
+}
+
+#patienter{
+color : white;  
+font-family : calibri;
+text-align : center;
+font-size : 30pt;
+}
+
+body
+{
+  background-color: #91AA9D;
+}   
+
+#probleme {
+font-size : 40px;
+color : white;  
+font-family : calibri;
+margin-top : 70px;
+margin-left:50px;
+position: absolute;
+}
+
+#texte {
+margin-left: auto;
+margin-right: auto;
+}
+
+#titre {
+font-size : 75px;
+color : #193441;
+font-family : calibri;
+border-width : 5px;
+border-color : grey;
+border-style : ridge;
+text-align : center;
+width : 600px;
+margin-top : 20px;
+margin-left:auto;
+margin-right:auto;
+}
+
+#Etape {
+font-size : 40px;
+color : #193441;  
+font-family : calibri;
+margin-top : 10px;
+margin-left:10px;
+text-align : center;
+}
+
+#Upload {
+text-align : center;
+margin-top : 10px;
+color : #193441;  
+}
+
+#monCanvas{
+margin-top:20px;
+margin-left: auto;
+margin-right: auto;
+border:5px  black;
+} 
+
+.corp_page_explication {
+font-weight:bold;
+font-size:20pt; 
+font-family:Calibri;    
+}
+.Suivante {
+background: #D1DBBD;
+border-radius: 10px;
+color: #193441;
+font: 100% Georgia, "Caslibri", Times, serif;
+letter-spacing: 1px;
+margin-top :5px;
+padding: 7px 25px;
+text-shadow: 0 1px 1px #000000;
+text-transform: uppercase;
+cursor: pointer;
+position: relative;	
+margin-left: auto;
+margin-right: auto;
+}
+
+h1{
+font-size:27pt; 
+font-family:Calibri;  
+}
+
+h2{
+font-family:Calibri;
+margin-left:10px;
+margin-top: 100px;
+color: #193441;
+font-size:23pt; 
+}
+
+p{
+font-family:Calibri;
+margin-left:10px;
+color: #193441;
+font-size:23pt; 
+}
+
+#cryptage{
+background-color: #193441;
+font-family:Calibri; 
+font-size:20pt;
+width : 39%;
+min-height: 550px;
+height : 650px;
+border: 5px groove black ;
+padding: 10px;  
+margin-left:50px;
+position:absolute;z-index:2;
+margin-top:4%;
+}
+
+#decryptage{
+background-color: #193441;
+font-family:Calibri; 
+font-size:20pt;
+width : 39%;
+min-height: 550px;
+height : 650px ;
+border: 5px groove black ;
+right: 50px;
+padding: 10px;  
+float: right;
+position:absolute;
+margin-top:4%;
+}
+
+#boutton_crypter {
+margin-left:35%;
+bottom : 40px;
+position:absolute;
+background: #000000;
+border-radius: 10px;
+font: 100% Georgia, "Calibri", Times, serif;
+color : white; 
+letter-spacing: 1px;
+padding: 7px 25px;
+text-shadow: 0 1px 1px #000000;
+text-transform: uppercase;
+cursor: pointer;	
+}
+
+.explication {
+background-color: white;
+font-family:Calibri; 
+font-size:30pt;
+width : 95%;
+height : 90%;
+border: 5px groove black ;
+padding: 10px;  
+margin-left:auto;
+margin-right:auto;
+}
+.premiere_page{
+background-color: white;
+font-family:Calibri; 
+font-size:30pt;
+width : 700px;
+height : 750px;
+border: 5px groove black ;
+margin-left : 30%;
+margin-top : 2%;
+position:absolute;z-index:2;
+padding: 10px; 
+
+}
+
+#resultat_cryptage{
+word-wrap : break-word
+}
+
+#resultat_decryptage{
+word-wrap : break-word
+}
+
+#option{
+background-color: #193441;
+font-family:Calibri; 
+width : 700px;
+height : 600px;
+border: 5px groove black ;
+margin-left : 30%;
+margin-top : 1%;
+position:relative;z-index:2;
+font-size:25pt;
+
+}
+
+
+
+
+
+
+#parti {
+background: #C60800;
+border-radius: 10px;
+color: #ffffff;
+display: block;
+font: 100% Georgia, "Calibri", Times, serif;
+letter-spacing: 1px;
+margin-left : 175px;
+margin-top: 200px;
+padding: 7px 25px;
+text-shadow: 0 1px 1px #000000;
+text-transform: uppercase;
+cursor: pointer;
+position:absolute;z-index:3;
+}
+
+
+#ModeListe {
+background-color:#FFF3F3;
+padding:2px;
+border:1px solid #F5C5C5;
+border-radius:5px;
+width:150px;
+box-shadow:1px 1px 2px #C0C0C0 inset;
+font: 30px Georgia, "Calibri", Times, serif;
+position:absolute;z-index:3;
+margin-left: 5px;
+}
+
+#Write {
+font-family:Calibri;
+margin-left:10px;
+margin-top: 100px;
+color: #193441;
+font-size:23pt; 
+position:relative;
+
+}
+
+#PixelListe{
+background-color:#FFFFFF;
+padding:2px;
+border:1px solid #F5C5C5;
+border-radius:5px;
+width:250px;
+box-shadow:1px 1px 2px #C0C0C0 inset;
+font: 30px Georgia, "Calibri", Times, serif;
+position:relative;z-index:3;
+}
+
+#InverseListe{
+background-color:#FFFFFF;
+padding:2px;
+border:1px solid #F5C5C5;
+border-radius:5px;
+width:250px;
+box-shadow:1px 1px 2px #C0C0C0 inset;
+font: 30px Georgia, "Calibri", Times, serif;
+position:relative;z-index:3;
+}
+
+#Recommencer_Image {
+margin-left:35%;
+margin-top:40px;
+position:relative;z-index:3;
+background: #FFFFFF;
+border-radius: 10px;
+color: #000000;
+font: 100% Georgia, "Calibri", Times, serif;
+letter-spacing: 1px;
+padding: 7px 25px;
+text-shadow: 0 1px 1px #000000;
+text-transform: uppercase;
+cursor: pointer;
+}
+
+#Recommencer{
+margin-left: auto;
+margin-right: auto;
+margin-top:40px;
+position:relative;z-index:3;
+background: #FFFFFF;
+border-radius: 10px;
+color: #000000;
+font: 100% Georgia, "Calibri", Times, serif;
+letter-spacing: 1px;
+padding: 7px 25px;
+text-shadow: 0 1px 1px #000000;
+text-transform: uppercase;
+cursor: pointer;
+}
+
+
+#Commencement {
+font-size:25px;
+width:100px;
+}
+
+
+#Fin {
+background-color: white;
+font-family:Calibri;
+width : 97%;
+border: 5px groove black ;
+margin:auto;
+display: flex;
+min-height:100%;
+
+}
+
+#Fin_r{
+width : 24.25%;   
+border-right: 5px groove black ;
+float: left;
+font-size:20pt;
+flex: 1;
+overflow: auto;
+word-wrap: break-word 
+}
+
+#Fin_v{
+width : 24.25%;    
+border-right: 5px groove black ;
+float: left;
+font-size:20pt;
+flex: 1;
+overflow: auto;
+word-wrap: break-word 
+}
+
+#Fin_b{
+width : 24.25%;    
+border-right: 5px groove black ;
+float: left;
+font-size:20pt;
+flex: 1;
+overflow: auto;
+word-wrap: break-word 
+}
+
+
+#Fin_o{
+width : 24.25%;   
+float: left;   
+font-size:20pt;
+flex: 1;
+overflow: auto;
+word-wrap: break-word 
+}
+
+.lol { 
+font-size:40pt;
+}
+
+
+.option_fin{
+width:100%;
+border-bottom :5px groove black ;
+
+}
+
+#page_principal{
+position:absolute;
+}

@@ -1,0 +1,420 @@
+  <!DOCTYPE html>
+  <html lang="fr"><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8"   >
+  <link rel="stylesheet" type="text/css" href="Ficher_Principal.css" />
+  <title>Vérification</title>
+</head>
+
+
+<body>
+<a id="page_principal" href="Page_Principal.html" target="_parent"> <img src="Home-512.png"> </img> </a>
+  <div class="container"  >
+
+   <div id="titre" class="titre" style="display:none;"> <!-- Le titre des etapes --> 
+   </div>
+
+   <div id="Etape" class="Etape" style="display:none;"> 
+   </div>
+
+   <div id="Upload" class="Upload" style="display:none;" >
+     <input id="file" type="file" onchange="onChange(this)">
+   </div>
+
+   <canvas id="monCanvas" style="display:none;"> </canvas>
+
+
+   
+		  
+
+
+		  
+
+      
+      <div id="Fin" style="display:none;" >
+        <div id="Fin_r">
+         <div class="option_fin">
+          <center>   Option  <center>  
+          </input> <input type="button" value="Affichage normal" onclick="Brute_r ()" > </input> <input type="button" value="Affichage Simplifier" onclick="Simplifier_r ()" > </input>
+        </div>
+        <center>  <span style="color:#FF0000" class="lol" id="titre_fin_r"> Rouge </span> </center>
+        <div id="texte_fin_r">
+          
+        </div>
+        
+      </div>
+      <div id="Fin_v">
+        <div class="option_fin">
+          <center>   Option  <center> 
+          </input> <input type="button" value="Affichage normal" onclick="Brute_v ()" > </input> <input type="button" value="Affichage Simplifier" onclick="Simplifier_v ()" > </input>
+        </div>
+        <center> <span style="color:#51FF00"  class="lol"> Vert </span> </center>
+        <div id="texte_fin_v">
+          
+        </div>
+      </div>
+      <div id="Fin_b">
+        <div class="option_fin">
+          <center>   Option  <center>  
+          </input> <input type="button" value="Affichage normal" onclick="Brute_b ()" > </input> <input type="button" value="Affichage Simplifier" onclick="Simplifier_b ()" > </input>
+        </div>
+        <center> <span style="color:#005AFF" class="lol"> Bleu </span> </center>
+        <div id="texte_fin_b">
+          
+        </div>
+        
+      </div>
+      <div id="Fin_o">
+        <div class="option_fin">
+          <center>   Option  <center>  
+          </input> <input type="button" value="Affichage normal" onclick="Brute_o ()" > </input> <input type="button" value="Affichage Simplifier" onclick="Simplifier_o()" > </input>
+        </div>
+        <center> <span style="color:#FF9E00" class="lol"> Opacité </span> </center>
+        <div id="texte_fin_o">
+          
+        </div>
+
+      </div>
+    </div>
+    
+    <div id="patienter">
+	
+	</div>
+    <input id="Recommencer" value="Recommencer" type="button" onclick="javascript:location.reload();" style="display:none;"> </input>
+    
+    
+    
+    <div id="suivante">
+      <input class= "Suivante" value="Etape Suivante" onclick="passer_1()" maxlength="110" type="button" id="Suivante_1"  style="display:none;">
+    </div>
+
+
+
+
+
+
+    <input id="Recommencer" value="Recommencer" type="button" onclick="javascript:location.reload();" style="display:none;"> </input>
+
+    
+    <div id="probleme" >
+    </div>
+    
+  </div>  
+  
+<div id="explication" class="premiere_page" >
+  
+
+
+  
+ 
+  
+  
+  <center><strong><big>Stéganographie : </big></strong></center>
+  <h1>
+      <br>
+	<br>
+    Ceci est un programme permettant de retrouvé un message dans une autre image
+    <br>
+	<br>
+    Si vous voulez des explications sur le fonctionnement du programme cliqué  <a href="Explication_Steganographie_retrouve_message.html"  target="_blank"> ici </a>
+
+
+    <input value="C'est parti !" onclick="Etape_1()" maxlength="11" type="button" id="parti" >
+
+  </h1>
+</div>
+
+
+
+  <script type="text/javascript">
+  //J'ai fait en très grande partie le code pour cacher le message et Gaetan a participé a ce document-ci  
+  
+  
+  
+  
+  //Le seul probléme de ce script est qu'il faut savoir le pixel de base , le premier pixel dans lequel le message a été caché
+  // Sinon tout est décalé voilà , je vous ai laissé la valeur x = "3" car le message est commence a la valeur de l'opacité
+  // du 3eme pixel
+  
+    // le x correspond au pixel de départ
+    var etape = 0
+    var PixelsImage = []
+    const allowedTypes = ["image/png", "image/jpg", "image/jpeg", "image/gif"];     
+    var canvas = document.getElementById("monCanvas");
+    var ctx = canvas.getContext("2d");
+      
+    var point = 1
+	var finit_patienter ="non"
+	
+    var values_r= ""
+    var values_v=""
+    var values_b=""
+    var values_o=""
+
+    var reconstitution_worker=1
+	
+    function onChange(sender)
+    {
+     
+     
+     var file = sender.files[0];
+     var fileType = file["type"];
+     if(allowedTypes.indexOf(fileType) == -1)
+     {
+      alert("Format du fichier invalide. Les formats acceptés sont : gif, jpeg, png. ");
+    }
+    else
+    {
+      var reader = new FileReader();
+      reader.onload = function(e)
+      {
+        var img = new Image();
+        img.src = e.target.result;
+        img.onload = function()
+        {
+        ctx.canvas.width = img.width;
+        ctx.canvas.height = img.height;
+        canvas.style.maxWidth = '1000px';
+        canvas.style.maxHeight = '800px';
+        ctx.drawImage(img, 0, 0);
+        PixelsImage = ctx.getImageData(0, 0, img.width, img.height);
+		canvas.style.borderStyle="ridge ridge ridge ridge" ;
+          
+          ctx.putImageData(PixelsImage, 0, 0);
+        }
+      };
+      reader.readAsDataURL(file);
+      
+    }
+
+    etape = 1
+  }
+  
+  
+  
+  
+  function Etape_1 (){
+    document.getElementById("Suivante_1").style.display="block";
+    document.getElementById("explication").style.display="none";
+    document.getElementById("monCanvas").style.display="block";
+    document.getElementById("titre").style.display="block";
+    document.getElementById("titre").innerHTML="Etape 1"
+    document.getElementById("Etape").style.display="block";
+    document.getElementById("Etape").innerHTML="Ici , vous devez simplement choisir l'image dans laquel vous avez caché le message. "
+    document.getElementById("Upload").style.display="block"
+  }
+  
+  function passer_1() {
+    if (etape == 1 ) {
+      go ()
+    }
+    else  {
+      document.getElementById("probleme").style.color="red"
+      document.getElementById("probleme").innerHTML = "Veuillez uploader une image avant"
+    }
+  }  
+  
+  
+  
+  
+  
+   
+ function Etape_2() {
+
+document.getElementById("Recommencer").style.display="block"
+document.getElementById("Fin").style.display="flex"
+document.getElementById("titre").style.display="block"
+document.getElementById("titre").innerHTML="Etape 2"
+document.getElementById("monCanvas").style.display="none";
+document.getElementById("Etape").innerHTML="Ici , vous devez choisir les options pour que le programme sache ou chercher le message et le résultat s'affiche ci dessous"
+document.getElementById("Upload").style.display="none"
+}  
+  
+  
+
+  
+  
+  
+  
+  
+
+ function go () {
+ document.getElementById("probleme").innerHTML = ""
+document.getElementById("Suivante_1").style.display="none"
+document.getElementById("Recommencer").style.display="none"
+document.getElementById("titre").style.display="none"
+document.getElementById("monCanvas").style.display="none";
+document.getElementById("Etape").innerHTML=""
+ document.getElementById("Upload").style.display="none"
+ 
+ 
+
+var point = 1
+
+affichage ()
+
+function affichage (){
+if ( point == 5) {
+point=1
+}
+if ( point == 4) {
+point =5
+document.getElementById("patienter").innerHTML="Veuillez patienter pendant que le programme travaille..."
+}
+if ( point == 3) {
+point =4
+document.getElementById("patienter").innerHTML="Veuillez patienter pendant que le programme travaille.."
+}
+if ( point == 2) {
+point =3
+document.getElementById("patienter").innerHTML="Veuillez patienter pendant que le programme travaille."
+}
+if ( point == 1) {
+point =2
+document.getElementById("patienter").innerHTML="Veuillez patienter pendant que le programme travaille"
+}
+timerpreparation=setTimeout(affichage,750)
+
+}
+
+ 
+ 
+ w=new Worker("message.js")
+
+ if (typeof(w) !== "undefined") {
+
+       w.postMessage(PixelsImage.data);
+       
+	   
+
+	   
+	   
+	   
+	   
+	   
+	   w.onmessage=function(event){
+
+	   		if (reconstitution_worker==8) {
+        opacite=event.data
+		w.terminate()
+		Etape_2 ()
+				clearInterval(timerpreparation)
+		document.getElementById("patienter").innerHTML=""
+		finit_patienter="oui"
+		}
+	   				 
+		if (reconstitution_worker==7) {
+        values_o=event.data
+		reconstitution_worker=8
+		}	
+	   		if (reconstitution_worker==6) {
+        bleu=event.data
+		reconstitution_worker=7
+		}
+	   		if (reconstitution_worker==5) {
+        values_b=event.data
+		reconstitution_worker=6
+		}	
+	   		if (reconstitution_worker==4) {
+        vert=event.data
+		reconstitution_worker=5
+		}	
+	   		if (reconstitution_worker==3) {
+        values_v=event.data
+		reconstitution_worker=4
+		}
+	     if (reconstitution_worker==2) {
+        rouge=event.data
+		reconstitution_worker=3
+		}	
+		if (reconstitution_worker==1) {
+        values_r=event.data
+		reconstitution_worker=2
+		}
+		
+		 
+		 
+	 
+	 
+	 
+
+
+
+	   
+	   
+} 
+
+
+
+
+}
+else {
+    alert("Votre navigateur n'est pas assez récent pour utiliser ce programme , pour parer ce problème veuillez mettre a jour votre navigateur" )
+} 
+}
+
+
+
+
+
+
+
+
+
+function Brute_r (){
+  document.getElementById("texte_fin_r").innerHTML =  rouge; 
+
+}
+function Simplifier_r (){
+values_r=values_r.toString(); 
+  document.getElementById("texte_fin_r").innerHTML =  values_r.replace( /[,]/g , " "); 
+
+}
+
+
+
+
+function Brute_v (){
+  document.getElementById("texte_fin_v").innerHTML =  vert; 
+
+}
+function Simplifier_v (){
+values_v=values_v.toString(); 
+  document.getElementById("texte_fin_v").innerHTML =  values_v.replace( /[,]/g , " "); 
+; 
+
+}
+
+
+
+
+function Brute_b(){
+  document.getElementById("texte_fin_b").innerHTML =  bleu; 
+
+}
+function Simplifier_b (){
+values_b=values_b.toString(); 
+  document.getElementById("texte_fin_b").innerHTML =  values_b.replace( /[,]/g , " "); 
+; 
+
+}
+
+function Brute_o (){
+  document.getElementById("texte_fin_o").innerHTML =  opacite; 
+
+}
+function Simplifier_o (){
+values_o=values_o.toString(); 
+  document.getElementById("texte_fin_o").innerHTML =  values_o.replace( /[,]/g , " "); 
+ 
+
+}
+
+
+
+
+
+</script>
+
+
+</body></html>
