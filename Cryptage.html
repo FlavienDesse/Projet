@@ -21,9 +21,9 @@ Taper votre message a crypter ici :
 <textarea rows="4" cols="50" id= "texte_crypter"class="textarea_cryptage" maxlength="100"></textarea>
 <br>
 <br>
-La clé ( qui vous permettra de retrouver le message ) : <span id="cle"> </span>
+La clé ( qui vous permettra de retrouver le message ) : <font id="cle"> </font>
 <br>
-Résultat :  <span id="resultat_cryptage"> </span>
+Résultat : <font id="resultat_cryptage"></font>
  <br>
  <br>
 <strong> Note : le programme accepte que des lettres et transforme les caractéres spéciaux</strong>
@@ -36,13 +36,13 @@ Résultat :  <span id="resultat_cryptage"> </span>
 <center><strong><big>Decrypter</big></strong></center>
 <br>
 Taper le message a decrypter ici :
-<textarea rows="4" cols="50" id="texte_decrypter" class="textarea_cryptage"></textarea>
+<textarea rows="4"cols="50"id="texte_decrypter"class="textarea_cryptage"></textarea>
 <br>
 <br>
-Rentrer la clé qui vous a été donné durant le cryptage :<input type="text" id="cle_decrypter"></span>
+Rentrer la clé qui vous a été donné durant le cryptage :<input type="text" id="cle_decrypter"></font>
 <br>
 <br>
-Résultat : <span id="resultat_decryptage" > </span>
+Résultat : <font id="resultat_decryptage" > </font>
  <br>
  <br>
 <input value="Decrypter" onclick="Decrypter()" maxlength="11" type="button" id="boutton_crypter" > 
@@ -73,8 +73,7 @@ Résultat : <span id="resultat_decryptage" > </span>
 
 
 function Etape_1() {
-
-document.getElementById("explication").style.display="none";
+ document.getElementById("explication").style.display="none";
 document.getElementById("titre").style.display="block";
 document.getElementById("titre").innerHTML="Cryptage"
 document.getElementById("cryptage").style.display="block"
@@ -341,7 +340,7 @@ cle_cryptage=melange_alphabet +  alphabet[parseInt(Math.random() * 24)] + parseI
 document.getElementById("cle").style.color="red"
 document.getElementById("cle").innerHTML=cle_cryptage
 for (a=0 ; a<texte_changer.length;a++){
-fin=fin + texte_changer[a]
+fin=fin+texte_changer[a]
 }
 document.getElementById("resultat_cryptage").style.color="red"
 document.getElementById("resultat_cryptage").innerHTML=fin

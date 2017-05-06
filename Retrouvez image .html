@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta http-equiv="content-type" content="text/html"; >
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="Ficher_Principal.css" />
+<title>Stegano</title>
+
+</head>
+  <body>
+<a id="page_principal" href="Page_Principal.html" target="_parent"> <img src="Home-512.png"> </img> </a>
+  
+   <div id="titre" class="titre" style="display:none;"> <!-- Le titre des etapes --> 
+ </div>
+
+ <div id="Etape" class="Etape" style="display:none;"> 
+ </div>
+  
+  
+  
+  <div id="Upload" class="Upload" style="display:none;">
+ <input id="file" type="file" onchange="onChange(this)" >
+</div>
+<canvas id="monCanvas" style="display:none;"> </canvas>
+
+
+
+<div id="suivante">
+  <input class= "Suivante" value="Etape Suivante" onclick="passer_1()" maxlength="110" type="button" id="Suivante_1"  style="display:none;">
+</div>
+<div id="explication" class="premiere_page" >
+
+  <center><strong><big>Retrouver une image dans une autre image : </big></strong></center>
+  <h1>
+	<br>
+	<br>
+	Veuillez sélectionner le mode de décryptage     
+    <select name="Liste" id="InverseListe" >
+    <option value="1" onclick="choix_1 () ">Mode 1</option>
+    <option value="2" onclick="choix_2 () ">Mode 2</option> 
+    </select>
+   <br>
+   <br>
+   <font onclick="Quelle_mode_choisir ()"  style="text-decoration:underline; color:blue;" > Quelle mode choisir ? </font>
+    <input value="C'est parti !" onclick="Etape_1()" maxlength="11" type="button" id="parti" >
+
+  </h1>
+</div>
+<div id="probleme" >
+</div>
+<input id="Recommencer" value="Recommencer" type="button" onclick="javascript:location.reload();" style="display:none;"> </input>
+<script type="text/javascript">
+var canvas = document.getElementById("monCanvas");
+var ctx = canvas.getContext("2d");
+var choix = 1
+const allowedTypes = ["image/png", "image/jpg", "image/jpeg", "image/gif"];    
+
+
+function Quelle_mode_choisir () {
+alert("Le mode dépend de la facon dont vous avez caché l'image , le mode 1 correspond a celui le plus basique ")
+}
+ 
+function Etape_1 (){
+  document.getElementById("Suivante_1").style.display="block";
+  document.getElementById("explication").style.display="none";
+  document.getElementById("monCanvas").style.display="block";
+  document.getElementById("titre").style.display="block";
+  document.getElementById("titre").innerHTML="Etape 1"
+  document.getElementById("Etape").style.display="block";
+  document.getElementById("Etape").innerHTML="Ici , vous devez simplement choisir l'image dans lequel une autre image se trouve"
+  document.getElementById("Upload").style.display="block"
+} 
+ 
+function Etape_2() {
+  document.getElementById("Suivante_1").style.display="none"
+  document.getElementById("titre").innerHTML="Etape 2"
+  document.getElementById("monCanvas").style.display="block";
+  document.getElementById("probleme").innerHTML=""
+  document.getElementById("Etape").innerHTML="Voilà le résultat final"
+  document.getElementById("Upload").style.display="none"
+  document.getElementById("Recommencer").style.display="block";
+  canvas.style.borderStyle="" ;
+} 
+ 
+function passer_1() {
+  if (Etape == 1 ) {
+    go ()
+  }
+  else   {
+    document.getElementById("probleme").style.color="red"
+    document.getElementById("probleme").innerHTML = "Veuillez uploader une image avant"
+  }
+} 
+ 
+function  nombretobinaire(nb){
+  var quotient=nb;
+  var liste=[0,0,0,0,0,0,0];
+  for (var i=0; i<7;i++){
+    liste[6-i]=quotient % 2;
+    quotient=(quotient-quotient % 2)/2;
+  }
+  return liste;
+}
+
+//Cree le canvas par rapport a l'upload
+
+function onChange(sender)
+{
+ 
+  
+  var file = sender.files[0];
+  var fileType = file["type"];
+  if(allowedTypes.indexOf(fileType) == -1)
+  {
+    alert("Format du fichier invalide. Les formats acceptés sont : gif, jpeg, png. ");
+  }
+  else
+  {
+    var reader = new FileReader();
+    reader.onload = function(e)
+    {
+      var img = new Image();
+      img.src = e.target.result;
+      img.onload = function()
+      {
+        ctx.canvas.width = img.width;
+        ctx.canvas.height = img.height;
+        canvas.style.maxWidth = '800px';
+        canvas.style.maxHeight = '600px';
+        ctx.drawImage(img, 0, 0);
+        PixelsImage = ctx.getImageData(0, 0, img.width, img.height);
+        canvas.style.borderStyle="ridge ridge ridge ridge" ;
+        ctx.putImageData(PixelsImage, 0, 0);
+      }
+    };
+    reader.readAsDataURL(file);
+    
+  }
+Etape = 1
+
+}
+
+
+function go() {
+document.getElementById("InverseListe").value=1
+if (choix == 1) {
+for ( x = 0; x < PixelsImage.width; x += 1 ) {
+        for ( y = 0; y < PixelsImage.height; y+= 1) {
+            for ( z = 0; z < 4; z +=1 ){
+ 
+                let pos = ((x * PixelsImage.height) + y ) * 4 + z
+ 
+                var pixel = PixelsImage.data[pos]
+ 
+
+                var newPixel = (pixel << 4) & 0b11110000
+                
+                PixelsImage.data[pos] = newPixel
+            }
+        }
+    }
+ 
+    ctx.putImageData(PixelsImage,0,0);
+
+}
+Etape_2()
+}
+
+function choix_1 () {
+choix = 1
+}
+
+function choix_2 () {
+choix = 2
+}
+</script>
+</body></html>
