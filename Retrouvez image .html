@@ -3,7 +3,7 @@
 <meta http-equiv="content-type" content="text/html"; >
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="Ficher_Principal.css" />
-<title>Stegano</title>
+<title>Retrouver une image</title>
 
 </head>
   <body>
@@ -34,10 +34,12 @@
 	<br>
 	<br>
 	Veuillez sélectionner le mode de décryptage     
-    <select name="Liste" id="InverseListe" >
-    <option value="1" onclick="choix_1 () ">Mode 1</option>
-    <option value="2" onclick="choix_2 () ">Mode 2</option> 
+    <select name="Liste" id="choix_id" >
+    <option value="1" >Mode 1</option>
+    <option value="2" >Mode 2</option> 
     </select>
+   <br>
+   Si vous voulez des explications cliquer <a href="Explication_Image.html"  target="_blank"> ici </a>
    <br>
    <br>
    <font onclick="Quelle_mode_choisir ()"  style="text-decoration:underline; color:blue;" > Quelle mode choisir ? </font>
@@ -51,7 +53,7 @@
 <script type="text/javascript">
 var canvas = document.getElementById("monCanvas");
 var ctx = canvas.getContext("2d");
-var choix = 1
+var choix
 const allowedTypes = ["image/png", "image/jpg", "image/jpeg", "image/gif"];    
 
 
@@ -66,7 +68,7 @@ function Etape_1 (){
   document.getElementById("titre").style.display="block";
   document.getElementById("titre").innerHTML="Etape 1"
   document.getElementById("Etape").style.display="block";
-  document.getElementById("Etape").innerHTML="Ici , vous devez simplement choisir l'image dans lequel une autre image se trouve"
+  document.getElementById("Etape").innerHTML="Ici , vous devez simplement choisir l'image dans laquelle une autre image se trouve"
   document.getElementById("Upload").style.display="block"
 } 
  
@@ -83,6 +85,7 @@ function Etape_2() {
  
 function passer_1() {
   if (Etape == 1 ) {
+  choix = document.getElementById("choix_id").options[document.getElementById('choix_id').selectedIndex].value
     go ()
   }
   else   {
@@ -91,15 +94,6 @@ function passer_1() {
   }
 } 
  
-function  nombretobinaire(nb){
-  var quotient=nb;
-  var liste=[0,0,0,0,0,0,0];
-  for (var i=0; i<7;i++){
-    liste[6-i]=quotient % 2;
-    quotient=(quotient-quotient % 2)/2;
-  }
-  return liste;
-}
 
 //Cree le canvas par rapport a l'upload
 
@@ -141,8 +135,9 @@ Etape = 1
 
 
 function go() {
-document.getElementById("InverseListe").value=1
+
 if (choix == 1) {
+//permet de lire tous les pixels de haut en bas 
 for ( x = 0; x < PixelsImage.width; x += 1 ) {
         for ( y = 0; y < PixelsImage.height; y+= 1) {
             for ( z = 0; z < 4; z +=1 ){
@@ -152,7 +147,7 @@ for ( x = 0; x < PixelsImage.width; x += 1 ) {
                 var pixel = PixelsImage.data[pos]
  
 
-                var newPixel = (pixel << 4) & 0b11110000
+                var newPixel = (pixel << 4) & 0b11110000    //Décale tous les pixels a droite puis garde que les 4 derniers
                 
                 PixelsImage.data[pos] = newPixel
             }
@@ -160,17 +155,37 @@ for ( x = 0; x < PixelsImage.width; x += 1 ) {
     }
  
     ctx.putImageData(PixelsImage,0,0);
-
-}
 Etape_2()
+} 
+
+else {
+
+for ( x = 0; x < PixelsImage.width; x += 1 ) {
+            for ( y = 0; y < PixelsImage.height; y+= 1) {
+ 
+                let pos = ((y * PixelsImage.width) + x) * 4
+                let hiBit = []
+                let alphaPixel = PixelsImage.data[pos + 3]
+                for ( z = 0; z < 3; z +=1 ){
+                    let hb = (alphaPixel << (5 + z)) & 0b10000000
+                    hiBit.push(hb)
+                }
+ 
+                PixelsImage.data[pos + 3] = 255
+ 
+                for ( z = 0; z < 3; z +=1 ){
+                    let pixel = PixelsImage.data[pos + z]
+                    let newPixel = ((pixel & 0b00000111) << 4 ) | hiBit[z]
+                    PixelsImage.data[pos + z] = newPixel
+                }
+            }
+        }
+        ctx.putImageData(PixelsImage,0,0);
+		Etape_2 ()
+
+}
 }
 
-function choix_1 () {
-choix = 1
-}
 
-function choix_2 () {
-choix = 2
-}
 </script>
 </body></html>

@@ -20,8 +20,8 @@ color:#1D2326;
 }
 
 .titre_souligne{
-  text-decoration: underline;
-  text-decoration-color: #FCFFF5;
+text-decoration: underline;
+text-decoration-color: #FCFFF5;
 }
 
 
@@ -78,6 +78,7 @@ padding-bottom: 20px;
 text-align:center;
 color:#1D2326;
  border-radius:8px;	
+ background-color:#958976;
  }
  
  #titre {

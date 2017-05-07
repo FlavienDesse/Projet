@@ -3,7 +3,7 @@
 <meta http-equiv="content-type" content="text/html"; >
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="Ficher_Principal.css" />
-<title>Stegano</title>
+<title>Cacher une image dans une autre image</title>
 
 </head>
   <body>
@@ -23,7 +23,7 @@
  <input id="file1" type="file" onchange="onChange1(this)">
 </div>
 
-<div id="image_upload">
+<div id="image_upload" style="display:none;">
 <canvas id="monCanvas_c" style="display:none;"> </canvas>
 <canvas id="monCanvas1" style="display:none;"> </canvas>
 </div>
@@ -34,13 +34,15 @@
 
 	<br>
 	Veuillez sélectionner le mode de cryptage     
-    <select name="Liste" id="InverseListe" >
-    <option value="1" onclick="choix_1 () ">Mode 1</option>
-    <option value="2" onclick="choix_2 () ">Mode 2</option> 
+    <select name="Liste" id="choix_id" >
+    <option value="1" >Mode 1</option>
+    <option value="2"  >Mode 2</option> 
     </select>
    <br>
+   Si vous voulez des explications cliquer <a href="Explication_Image.html"  target="_blank"> ici </a>
    <br>
-   <a> Quelle mode choisir ? </a>
+   <br>
+   <font onclick="Quelle_mode_choisir ()"  style="text-decoration:underline; color:blue;" > Quelle mode choisir ? </font>
     <input value="C'est parti !" onclick="Etape_1()" maxlength="11" type="button" id="parti" >
 
   </h1>
@@ -64,8 +66,11 @@ var ctx1 = canvas1.getContext("2d");
 var PixelsImage_image_a_cacher = []
 var PixelsImage = []
 var Etape=0
+var choix
 
-
+function Quelle_mode_choisir () {
+alert("Nous vous conseillons le mode 1 , le mode 2 est incomplet")
+}
 
 
 function Etape_1 (){
@@ -79,6 +84,8 @@ document.getElementById("Etape").style.display="block";
 document.getElementById("Etape").innerHTML="Ici , vous devez choisir les images , celle de droite correspond a l'image qui va être cacher dans l'image de gauche"
 document.getElementById("Upload_c").style.display="block"
 document.getElementById("Upload1").style.display="block"
+document.getElementById("image_upload").style.display="block"
+
 }
 
 function Etape_2() {
@@ -97,6 +104,7 @@ function Etape_2() {
 
 function passer_1() {
   if (Etape == 2 ) {
+  choix = document.getElementById("choix_id").options[document.getElementById('choix_id').selectedIndex].value
     go ()
   }
   else   {
@@ -202,8 +210,7 @@ Etape ++
 
 
 function go () {
-    // Il faudra verifié que image source est plus grande que image a caché !
-
+    if (choix == 1) {
     for ( x = 0; x < PixelsImage.width; x += 1 ) {
         for ( y = 0; y < PixelsImage.height; y+= 1) {
             for ( z = 0; z < 4; z +=1 ){
@@ -230,6 +237,49 @@ function go () {
  }
 
 
+else {
+
+  for ( x = 0; x < PixelsImage.width; x++ ) {
+            for ( y = 0; y < PixelsImage.height; y++) {
+ 
+                let pos = ((y * PixelsImage.width) + x) * 4
+ 
+                // posCache est la position x y relatif a l'image a caché
+                // si la position est hors de l'image, elle faudra -1
+                let posCache = -1
+                if( x < PixelsImage_image_a_cacher.width && y < PixelsImage_image_a_cacher.height) {
+                    posCache = ((y * PixelsImage_image_a_cacher.width) + x) * 4
+                }
+ 
+                for ( z = 0; z < 3; z +=1 ){
+     
+                    let pixel = PixelsImage.data[pos + z]
+                    let pixelCache = posCache === -1 ? 0 : PixelsImage_image_a_cacher.data[posCache + z]
+ 
+                    let hPixel = (pixel & 0b11111000)
+                    let lPixel = ((pixelCache & 0b01110000) >>> 4 )
+ 
+                    PixelsImage.data[pos + z] = hPixel | lPixel
+                 
+                }
+                 
+                let alpha = PixelsImage.data[pos + 3] & 0b11111000
+                if ( posCache !== -1 ){
+                    for ( z = 0; z < 3; z++  ){
+                        alpha |= ((PixelsImage_image_a_cacher.data[posCache + z] || 0 ) & 0b10000000) >>> (5+z)
+                    }
+                }
+                PixelsImage.data[pos+3] = alpha
+                 
+            }
+        }
+        ctx.putImageData(PixelsImage,0,0);
+Etape_2 ()
+
+
+
+}
+}
 
 
 

@@ -2,7 +2,7 @@
 <html lang="fr"><head>
 <meta http-equiv="content-type" content="text/html"; >
 <meta charset="UTF-8">
-<title>Stegano</title>
+<title>Cacher un texte dans une image</title>
 <link rel="stylesheet" type="text/css" href="Ficher_Principal.css" />
 </head>
 
@@ -30,20 +30,20 @@
 
 
 
- <div id="Write" style="display:none;" > Vous pouvez choisir si le texte sera codé a l'envers le texte sera codé dans l'image de droite a gauche au lieu de gauche a droite :
+ <div id="Write" style="display:none;" > Vous pouvez choisir si le texte sera codé à l'envers , par exemple bonjour sera codé ruojnob ( en outre le programme permettant de retrouver les messages cachés dans une image ne pourra pas retrouver le message ) :
    <select name="Liste" id="InverseListe" >
     <option value="NonInverse" onclick="inverseoupas()">Non Inverse</option>
     <option value="Inverse" onclick="inverseoupas()">Inverse</option> 
   </select>
 
   
-  <br>
+
 </div>
 
 <p id="Debut" style="display:none;">
  <font id="maxPixel"> </font> ) 
  <input id="Commencement" value="" maxlength="50" type="text" onkeyup="actualiser_maxpixel()" > </input>
- <br> En outre le pixel sur lequel sera codé le message sera le pixel <font id="Pixelchoisi"> </font>
+ <br> En outre le pixel sur lequel sera codé le message sera le pixel : <font id="Pixelchoisi"> ?? </font>
 </p>
 
 <input id="Recommencer" value="Recommencer" type="button" onclick="javascript:location.reload();" style="display:none;"> </input>
@@ -191,7 +191,7 @@ function Etape_4 (){
   document.getElementById("Suivante_2").style.display="none"
   document.getElementById("Suivante_3").style.display="block"
   document.getElementById("titre").innerHTML="Etape 4"
-  document.getElementById("Etape").innerHTML="Voila , vous avez finis , si vous êtes satisfait du résultat vous pouvez enregistrer l'image ou recommencer "
+  document.getElementById("Etape").innerHTML="Voila , vous avez fini , si vous êtes satisfait du résultat vous pouvez enregistrer l'image ou recommencer "
   document.getElementById("probleme").innerHTML = ""
   document.getElementById("Debut").style.display="none"
   document.getElementById("Write").style.display="none"

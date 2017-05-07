@@ -18,15 +18,15 @@
     <center><strong><big>Explication: </big></strong></center>
     <br>
     <div class="corp_page_explication">
-      La manière de cacher un texte dans une image est très simple a comprendre. 
+      La manière de cacher un texte dans une image est très simple à comprendre. 
       <br>
       <br>
 
-      Pour commencer une image est codé en Pixel , et c'est Pixel sont eux-mêmes codés en 4 valeurs , Rouge , Vert , Bleu , Opacité valant une valeur entre 0 et 255 . Par exemple si un Pixel a pour valeur Rouge = 255 Vert = 0 Bleu = 0 et Opacité = 255 la couleur retourné sera rouge.
+      Pour commencer une image est codée en Pixel , et les Pixel sont eux-mêmes codés en 4 valeurs , Rouge , Vert , Bleu , Opacité valant une valeur entre 0 et 255 . Par exemple si un Pixel a pour valeur Rouge = 255 Vert = 0 Bleu = 0 et Opacité = 255 la couleur retournée sera rouge.
       <br>
-      Une lettre en informatique est codé par son code <a href="http://table-ascii.com/"  target="_blank"> ASCII </a> par exemple la lettre A vaut 66 en décimal et pour cacher ce texte nous allons convertir cette lettre en binaire la lettre A en binaire vaut 1000010 ( en 7 bits )
+      Une lettre en informatique est codée par son code <a href="http://table-ascii.com/"  target="_blank"> ASCII </a> par exemple la lettre A vaut 66 en décimal. Pour cacher ce texte nous allons convertir cette lettre en binaire la lettre A qui vaut en binaire  1000010 ( en 7 bits )
       <br>
-      Maintenant que nous savons cela nous allons utilisé le procédé des bits de poids faible nous allons caché un bit de notre lettre dans le bit le plus faible d'une valeur du Pixel exemple si nous voulons caché la lettre " A " il nous fraudra alors par exemple 7 valeurs de la composante rouge cela fait donc :
+      Maintenant que nous savons cela nous allons utiliser le procédé des bits de poids faible. Nous allons cacher un bit de notre lettre dans le bit le plus faible d'une valeur du Pixel. Exemple si nous voulons cacher la lettre " A " il nous fraudra alors par exemple 7 valeurs de la composante rouge cela fait donc :
       <br> 
       <br>
 
@@ -38,8 +38,8 @@
       <TABLE BORDER="1"> 
         <TR> 
          <TH> Pixel n°  </TH> 
-         <TH> composante rouge initiale en décimale </TH> 
-         <TH> bites de poid faible </TH> 
+         <TH> composante rouge initiale en décimal </TH> 
+         <TH> bits de poid faible </TH> 
          <TH> bit à cacher de "A" </TH> 
          <TH> composante rouge finale en binaire (en 7 bits) </TH> 
          <TH> composante rouge finale en décimale </TH> 
@@ -109,7 +109,7 @@
      </TABLE> 
      <br>
 
-     Remarque si une valeur d'une composante est impair son bit de poid faible vaudra 1 et si il est pair il vaudra 0
+     Remarque : si une valeur d'une composante est impaire son bit de poid faible vaudra 1 et si il est pair il vaudra 0
      <br>
      <br> 
      Image de départ :  
@@ -117,7 +117,7 @@
      <img src="Explicatio_Stegan_normal.png"  WIDTH=40% ></img> 
      <br>
      <br>
-     texte a introduire : 
+     Texte à introduire : 
      <br>
      Mon cher ami, je vous envoie un petit ouvrage dont on ne pourrait pas dire, sans injustice, qu’il n’a ni queue ni tête, puisque tout, au contraire, y est à la fois tête et queue, alternativement et réciproquement. Considérez, je vous prie, quelles admirables commodités cette combinaison nous offre à tous, à vous, à moi et au lecteur. Nous pouvons couper où nous voulons, moi ma rêverie, vous le manuscrit, le lecteur sa lecture ; car je ne suspends pas la volonté rétive de celui-ci au fil interminable d’une intrigue superfine. Enlevez une vertèbre, et les deux morceaux de cette tortueuse fantaisie se rejoindront sans peine. Hachez-la en nombreux fragments, et vous verrez que chacun peut exister à part. Dans l’espérance que quelques-uns de ces tronçons seront assez vivants pour vous plaire et vous amuser, j’ose vous dédier le serpent tout entier. <br>provenant de   <a href="https://fr.wikisource.org/wiki/Petits_Po%C3%A8mes_en_prose/Texte_entier" target="_blank" > là </a>
      <br>
@@ -127,10 +127,10 @@
      <img src="Explicatio_Stegano_modifi.png"  WIDTH=40% >
 	 </img>
 	 <br> 
-	 Comme pouve voir l'image n'a pas été modifié mais le texte est présent dans celui-ci
+	 Comme on peut voir l'image n'a pas été modifiée mais le texte est présent dans celui-ci
 	 <br>
 	 <br>
-	 Petite note : le mode " inverse " présent dans le programme permmettant de cacher un message code les messages en ruojnob il sera pratiquement impossible de retrouver le message
+	 Petite note : le mode " inverse " présent dans le programme permettant de cacher un message codé les messages à l'envers , il sera pratiquement impossible de retrouver le message.
 	 
    </div>
 

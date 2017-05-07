@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta http-equiv="content-type" content="text/html"; >
+<meta charset="UTF-8">
+<title>Explication</title>
+<link rel="stylesheet" type="text/css" href="Ficher_Principal.css" />
+</head>
+<body>
+  
+  <div id="explication" class="explication" >
+    
+
+
+    <a id="page_principal" href="Page_Principal.html" target="_parent" >  <img src="Home-512.png" > </img> </a>
+
+    
+    <center><strong><big>Explication: </big></strong></center>
+	Pour cacher une image dans une autre image il suffit de mettres le bits de poids fort de l'image à cacher dans l'image de base.
+		 <br>
+		 <br>
+		 <TABLE BORDER="1"> 
+        <TR> 
+         <TH> Pixel n°  </TH> 
+         <TH>  composante rouge de l'image de base    </TH> 
+         <TH> composante rouge de l'image à cacher </TH> 
+         <TH> composante rouge de l'image finale</TH> 
+       </TR> 
+       
+       <TR> 
+         <TH> 0 </TH> 
+         <TD> <FONT color="red">1100</FONT>1010</TD> 
+         <TD> <FONT color="green">1111</FONT>1111</TD> 
+         <TD> <FONT color="red">1100</FONT><FONT color="green">1111</FONT></TD> 
+       </TR> 
+
+       <TR> 
+         <TH> 1 </TH> 
+         <TD> <FONT color="red">1111</FONT>1000</TD> 
+         <TD> <FONT color="green">0001</FONT>1000</TD> 
+         <TD> <FONT color="red">1111</FONT><FONT color="green">0001</FONT> </TD> 
+       </TR> 
+       <TR> 
+         <TH> 2 </TH> 
+         <TD> <FONT color="red">1000</FONT>1111</TD> 
+         <TD> <FONT color="green">1101</FONT>1111</TD> 
+         <TD> <FONT color="red">1000</FONT><FONT color="green">1101</FONT> </TD> 
+       </TR> 
+       <TR> 
+         <TH> 3 </TH> 
+         <TD> <FONT color="red">0000</FONT>1111 </TD> 
+         <TD> <FONT color="green">1001</FONT>1001</TD> 
+         <TD> <FONT color="red">0000</FONT><FONT color="green">1001</FONT> </TD> 
+       </TR> 
+       <TR> 
+
+     </TABLE> 
+    
+<br>
+<br>
+Le tableau correspond à la première façon , la seconde façon consiste à cacher le bit le plus fort de l'image de la composante rouge , verte et bleu de l'image à cacher dans les bits de poids faible de l'opacité de l'image de base.
+ <br>
+<br>
+ <TABLE BORDER="1"> 
+        <TR> 
+         <TH> Pixel n°  </TH> 
+         <TH> composante verte de l'image de base    </TH> 
+         <TH> composante verte de l'image à cacher </TH> 
+		 <TH> composante opacité de l'image de l'image finale </TH> 
+         <TH> composante rouge de l'image finale</TH> 
+       </TR> 
+       
+       <TR> 
+         <TH> 0 </TH> 
+         <TD> <FONT color="purple">11001</FONT>010</TD> 
+         <TD> <FONT color="green">1</FONT><FONT color="brown">111</FONT>1111</TD> 
+         <TD> <FONT color="orange">11111</FONT><FONT color="red">1</FONT><FONT color="green">1</FONT><FONT color="blue">0</FONT></TD> 
+		 <TD><FONT color="purple">11001</FONT><FONT color="brown">111</FONT><TD>
+       </TR> 
+
+       <TR> 
+         <TH> 1 </TH> 
+         <TD> <FONT color="purple">11111</FONT>000</TD> 
+         <TD> <FONT color="green">0</FONT><FONT color="brown">001</FONT>1000</TD> 
+         <TD> <FONT color="orange">11111</FONT><FONT color="red">0</FONT><FONT color="green">0</FONT><FONT color="blue">0</FONT></TD> 
+		 <TD><FONT color="purple">11111</FONT><FONT color="brown">001</FONT><TD>
+       </TR> 
+       <TR> 
+         <TH> 2 </TH> 
+         <TD> <FONT color="purple">10001</FONT>111</TD> 
+         <TD> <FONT color="green">1</FONT><FONT color="brown">101</FONT>1111</TD> 
+         <TD> <FONT color="orange">11111</FONT><FONT color="red">1</FONT><FONT color="green">1</FONT><FONT color="blue">1</FONT></TD>
+         <TD> <FONT color="purple">10001</FONT><FONT color="brown">101</FONT></TD> 		 
+       </TR> 
+       <TR> 
+         <TH> 3 </TH> 
+         <TD> <FONT color="purple">00001</FONT>111 </TD> 
+         <TD> <FONT color="green">1</FONT><FONT color="brown">001</FONT>1001</TD> 
+         <TD> <FONT color="orange">11111</FONT><FONT color="red">0</FONT><FONT color="green">1</FONT><FONT color="blue">1</FONT></TD> 
+		 <TD><FONT color="purple">00001</FONT><FONT color="brown">001</FONT><TD>
+       </TR> 
+       <TR> 
+
+     </TABLE> 
+
+</body></html>
