@@ -11,6 +11,9 @@ background:#7a7a6d;
 font-weight: bold;
 }
 
+#license{
+position:absolute;
+}
 
 h1{
 margin-top:10px;

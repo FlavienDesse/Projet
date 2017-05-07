@@ -156,7 +156,7 @@ function Etape_1 (){
   document.getElementById("titre").style.display="block";
   document.getElementById("titre").innerHTML="Etape 1"
   document.getElementById("Etape").style.display="block";
-  document.getElementById("Etape").innerHTML="Ici , vous devez simplement choisir l'image dans laquelle vous voulez que le texte soit introduit  "
+  document.getElementById("Etape").innerHTML="Ici , vous devez choisir l'image dans laquelle vous voulez que le texte soit introduit  "
   document.getElementById("Upload").style.display="block"
 }
 
@@ -167,7 +167,7 @@ function Etape_2() {
   document.getElementById("Suivante_2").style.display="block"
   document.getElementById("titre").innerHTML="Etape 2"
   document.getElementById("monCanvas").style.display="none";
-  document.getElementById("Etape").innerHTML="Ici , vous devez rentrer le texte dans lequel vous voulez qu'il soit intégrer dans l'image"
+  document.getElementById("Etape").innerHTML="Ici , vous devez rentrer le texte que vous voulez intégrer dans l'image"
   document.getElementById("Upload").style.display="none"
   document.getElementById("texte").style.display="block"
 }
@@ -191,7 +191,7 @@ function Etape_4 (){
   document.getElementById("Suivante_2").style.display="none"
   document.getElementById("Suivante_3").style.display="block"
   document.getElementById("titre").innerHTML="Etape 4"
-  document.getElementById("Etape").innerHTML="Voila , vous avez fini , si vous êtes satisfait du résultat vous pouvez enregistrer l'image ou recommencer "
+  document.getElementById("Etape").innerHTML="Voila, vous avez fini, si vous êtes satisfait du résultat vous pouvez enregistrer l'image ou recommencer "
   document.getElementById("probleme").innerHTML = ""
   document.getElementById("Debut").style.display="none"
   document.getElementById("Write").style.display="none"
@@ -288,7 +288,7 @@ function passer_3 (){
 
   if ((Utilisateur_max_pixel_demande > nombremaxpixel && inverse_ou_pas_choisi=="NonInverse" ) || (inverse_ou_pas_choisi=="Inverse" && Utilisateur_max_pixel_demande <= nombremaxpixel) || isNaN(Utilisateur_max_pixel_demande)== true || Utilisateur_max_pixel_demande==""){
     document.getElementById("probleme").style.color="red"
-    document.getElementById("probleme").innerHTML = "Impossible de continuer , vous avez omni une régles"
+    document.getElementById("probleme").innerHTML = "Impossible de continuer , vous avez omni une régle"
   }
   else {
 
