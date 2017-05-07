@@ -1,84 +1,85 @@
 <!DOCTYPE html>
-<html lang="fr"><head>
-<meta http-equiv="content-type" content="text/html"; >
-<meta charset="UTF-8">
-<title>Cryptage</title>
-<link rel="stylesheet" type="text/css" href="Ficher_Principal.css" />
-</head>
-<body>
+  <html lang="fr"><head>
+  <meta http-equiv="content-type" content="text/html"; >
+  <meta charset="UTF-8">
+  <title>Cryptage</title>
+  <link rel="stylesheet" type="text/css" href="Ficher_Principal.css" />
+  </head>
+  <body>
 
-<div class="container"  >
+  <div class="container"  >
 
-<a id="page_principal" href="Page_Principal.html" target="_parent"> <img src="Home-512.png"> </img> </a>
-   <div id="titre" class="titre" style="display:none;"> <!-- Le titre des etapes --> 
-   </div>
+  <a id="page_principal" href="Page_Principal.html" target="_parent"> <img src="Home-512.png"> </img> </a>
+     <div id="titre" class="titre" style="display:none;"> <!-- Le titre des etapes --> 
+     </div>
+     
+     
+   <div id="cryptage" style="display:none;">                
+  <center><strong><big>Crypter</big></strong></center>
+  <br>
+  Tapez votre message à crypter ici :
+  <textarea rows="4" cols="50" id= "texte_crypter"class="textarea_cryptage" maxlength="100"></textarea>
+  <br>
+  <br>
+  La clé ( qui vous permettra de retrouver le message ) : <font id="cle"> </font>
+  <br>
+  Résultat : <font id="resultat_cryptage"></font>
+   <br>
+   <br>
+  <strong> Note : le programme accepte que des lettres et transforme les caractères spéciaux</strong>
+   <br>
+
+  <input value="Crypter" onclick="crypter ()" maxlength="11" type="button" id="boutton_crypter"  > 
+   </div>  
    
-   
- <div id="cryptage" style="display:none;">                
-<center><strong><big>Crypter</big></strong></center>
-<br>
-Tapez votre message à crypter ici :
-<textarea rows="4" cols="50" id= "texte_crypter"class="textarea_cryptage" maxlength="100"></textarea>
-<br>
-<br>
-La clé ( qui vous permettra de retrouver le message ) : <font id="cle"> </font>
-<br>
-Résultat : <font id="resultat_cryptage"></font>
- <br>
- <br>
-<strong> Note : le programme accepte que des lettres et transforme les caractères spéciaux</strong>
- <br>
+    <div id="decryptage" style="display:none;">                
+  <center><strong><big>Decrypter</big></strong></center>
+  <br>
+  Tapez le message à decrypter ici :
+  <textarea rows="4"cols="50"id="texte_decrypter"class="textarea_cryptage"></textarea>
+  <br>
+  <br>
+  Rentrez la clé qui vous a été donnée durant le cryptage :<input type="text" id="cle_decrypter"></font>
+  <br>
+  <br>
+  Résultat : <font id="resultat_decryptage" > </font>
+   <br>
+   <br>
+  <input value="Decrypter" onclick="Decrypter()" maxlength="11" type="button" id="boutton_crypter" > 
+   </div>  
+     
+     
+  <div id="explication" class="premiere_page" >
 
-<input value="Crypter" onclick="crypter ()" maxlength="11" type="button" id="boutton_crypter"  > 
- </div>  
- 
-  <div id="decryptage" style="display:none;">                
-<center><strong><big>Decrypter</big></strong></center>
-<br>
-Tapez le message à decrypter ici :
-<textarea rows="4"cols="50"id="texte_decrypter"class="textarea_cryptage"></textarea>
-<br>
-<br>
-Rentrez la clé qui vous a été donnée durant le cryptage :<input type="text" id="cle_decrypter"></font>
-<br>
-<br>
-Résultat : <font id="resultat_decryptage" > </font>
- <br>
- <br>
-<input value="Decrypter" onclick="Decrypter()" maxlength="11" type="button" id="boutton_crypter" > 
- </div>  
-   
-   
-<div id="explication" class="premiere_page" >
+    <center><strong><big>Cryptage : </big></strong></center>
+    <h1>
+        <br>
+    <br>
+      Ceci est un programme permettant de crypter un message unique et de décrypter un message utilisé selon la technique du programme
 
-  <center><strong><big>Cryptage : </big></strong></center>
-  <h1>
-      <br>
-	<br>
-    Ceci est un programme permettant de crypter un message unique et de décrypter un message utilisé selon la technique du programme
 
+      <input value="C'est parti !" onclick="Etape_1()" maxlength="11" type="button" id="parti" >
 
-    <input value="C'est parti !" onclick="Etape_1()" maxlength="11" type="button" id="parti" >
+    </h1>
+  </div>
 
-  </h1>
-</div>
+  </div>
+   <script type="text/javascript">
 
-</div>
- <script type="text/javascript">
 
 
 
 
 
 
+  function Etape_1() {
+   document.getElementById("explication").style.display="none";
+  document.getElementById("titre").style.display="block";
+  document.getElementById("titre").innerHTML="Cryptage"
+  document.getElementById("cryptage").style.display="block"
+  document.getElementById("decryptage").style.display="block"
+  }
 
-function Etape_1() {
- document.getElementById("explication").style.display="none";
-document.getElementById("titre").style.display="block";
-document.getElementById("titre").innerHTML="Cryptage"
-document.getElementById("cryptage").style.display="block"
-document.getElementById("decryptage").style.display="block"
-}
 
 
 
@@ -89,531 +90,530 @@ document.getElementById("decryptage").style.display="block"
 
 
 
+  function crypter () {
 
-function crypter () {
 
+  var alphabet  = ["X" , "Y" , "Z" , "A" , "B" , "C" , "D" , "E" , "F", "G" , "H" , "I" , "J", "K" ,"L" ,"M" ,"N" ,"O" ,"P" ,"Q" ,"R" ,"S" ,"T" ,"U" ,"V" ,"W"]
+  var melange_alphabet = parseInt(Math.random() * 19) + 5
 
-var alphabet  = ["X" , "Y" , "Z" , "A" , "B" , "C" , "D" , "E" , "F", "G" , "H" , "I" , "J", "K" ,"L" ,"M" ,"N" ,"O" ,"P" ,"Q" ,"R" ,"S" ,"T" ,"U" ,"V" ,"W"]
-var melange_alphabet = parseInt(Math.random() * 19) + 5
 
+  for(a=0 ; a < parseInt(melange_alphabet/2) +1  ; a++) {
+  let changement = alphabet[a]
+  alphabet[a]=alphabet[melange_alphabet-a]
+  alphabet[melange_alphabet-a]=changement
+  }
 
-for(a=0 ; a < parseInt(melange_alphabet/2) +1  ; a++) {
-let changement = alphabet[a]
-alphabet[a]=alphabet[melange_alphabet-a]
-alphabet[melange_alphabet-a]=changement
-}
+  var texte =[]
+  var texte_changer=[]
+  var flip = 0
+  var fin = ""
 
-var texte =[]
-var texte_changer=[]
-var flip = 0
-var fin = ""
-
-
-var texte_string=document.getElementById("texte_crypter").value.toUpperCase()
-texte_string=texte_string.replace(/(\W)/g,"")
-
-for ( a=0 ; a<texte_string.length ;a++) {
-if (isNaN(texte_string.charAt(a))== false ) {
-alert("Votre message ne doit pas contenir de nombre ")
-return;
-}
-}
-
-
-for (a=0 ; a<texte_string.length;a++){
-texte.push(texte_string.charAt(a))
-}
-
-for (a=0 ; a<texte.length ;a++){
-
-
-
-
-let premiere_lettre=alphabet[0]
-let deuxieme_lettre=alphabet[1]
-let troisieme_lettre=alphabet[2]
-let quatrieme_lettre=alphabet[3]
-let cinquieme_lettre=alphabet[4]
-let sixieme_lettre=alphabet[5]
-let setieme_lettre=alphabet[6]
-let huitieme_lettre=alphabet[7]
-let neuvieme_lettre=alphabet[8]
-let dixieme_lettre=alphabet[9]
-let onzieme_lettre=alphabet[10]
-let douxieme_lettre=alphabet[11]
-let tresieme_lettre=alphabet[12]
-let quatorzieme_lettre=alphabet[13]
-let quinzieme_lettre=alphabet[14]
-let seizieme_lettre=alphabet[15]
-let dix_septieme_lettre=alphabet[16]
-let dix_huitieme_lettre=alphabet[17]
-let dix_neufieme_lettre=alphabet[18]
-let vingtieme_lettre=alphabet[19]
-let vingt_unieme_lettre=alphabet[20]
-let vingt_deuxieme_lettre=alphabet[21]
-let vingtieme_troiseme_lettre=alphabet[22]
-let vingtieme_quatrieme_lettre=alphabet[23]
-let vingtieme_cinquieme_lettre=alphabet[24]
-let vingtieme_sixieme_lettre=alphabet[25]
-
-
-
-
-
-if (flip == 1){
-alphabet[0]=troisieme_lettre
-alphabet[1]=dixieme_lettre
-alphabet[2]=cinquieme_lettre
-alphabet[3]=sixieme_lettre
-alphabet[4]=setieme_lettre
-alphabet[5]=huitieme_lettre
-alphabet[6]=neuvieme_lettre
-alphabet[7]=dix_neufieme_lettre
-alphabet[8]=onzieme_lettre
-alphabet[9]=douxieme_lettre
-alphabet[10]=tresieme_lettre
-alphabet[11]=quatorzieme_lettre
-alphabet[12]=quinzieme_lettre
-alphabet[13]=seizieme_lettre
-alphabet[14]=dix_septieme_lettre
-alphabet[15]=dix_huitieme_lettre
-alphabet[16]=quatrieme_lettre
-alphabet[17]=vingtieme_lettre
-alphabet[18]=vingt_unieme_lettre
-alphabet[19]=vingt_deuxieme_lettre
-alphabet[20]=vingtieme_troiseme_lettre
-alphabet[21]=vingtieme_quatrieme_lettre
-alphabet[22]=vingtieme_cinquieme_lettre
-alphabet[23]=vingtieme_sixieme_lettre
-alphabet[24]=premiere_lettre
-alphabet[25]=deuxieme_lettre
-}
-
-
-
-
-else if (flip == 3) {
-alphabet[0]=troisieme_lettre
-alphabet[1]=quatrieme_lettre
-alphabet[2]=cinquieme_lettre
-alphabet[3]=sixieme_lettre
-alphabet[4]=setieme_lettre
-alphabet[5]=huitieme_lettre
-alphabet[6]=neuvieme_lettre
-alphabet[7]=dixieme_lettre
-alphabet[8]=onzieme_lettre
-alphabet[9]=douxieme_lettre
-alphabet[10]=tresieme_lettre
-alphabet[11]=quatorzieme_lettre
-alphabet[12]=quinzieme_lettre
-alphabet[13]=seizieme_lettre
-alphabet[14]=dix_septieme_lettre
-alphabet[15]=dix_huitieme_lettre
-alphabet[16]=dix_neufieme_lettre
-alphabet[17]=vingtieme_lettre
-alphabet[18]=vingt_unieme_lettre
-alphabet[19]=vingt_deuxieme_lettre
-alphabet[20]=vingtieme_troiseme_lettre
-alphabet[21]=vingtieme_quatrieme_lettre
-alphabet[22]=vingtieme_cinquieme_lettre
-alphabet[23]=vingtieme_sixieme_lettre
-alphabet[24]=premiere_lettre
-alphabet[25]=deuxieme_lettre
-flip = 0
-}
-
-else {
-alphabet[0]=quatrieme_lettre
-alphabet[1]=cinquieme_lettre
-alphabet[2]=sixieme_lettre
-alphabet[3]=setieme_lettre
-alphabet[4]=huitieme_lettre
-alphabet[5]=neuvieme_lettre
-alphabet[6]=dixieme_lettre
-alphabet[7]=onzieme_lettre
-alphabet[8]=douxieme_lettre
-alphabet[9]=tresieme_lettre
-alphabet[10]=quatorzieme_lettre
-alphabet[11]=quinzieme_lettre
-alphabet[12]=seizieme_lettre
-alphabet[13]=dix_septieme_lettre
-alphabet[14]=dix_huitieme_lettre
-alphabet[15]=dix_neufieme_lettre
-alphabet[16]=vingtieme_lettre
-alphabet[17]=vingt_unieme_lettre
-alphabet[18]=vingt_deuxieme_lettre
-alphabet[19]=vingtieme_troiseme_lettre
-alphabet[20]=vingtieme_quatrieme_lettre
-alphabet[21]=vingtieme_cinquieme_lettre
-alphabet[22]=vingtieme_sixieme_lettre
-alphabet[23]=premiere_lettre
-alphabet[24]=deuxieme_lettre
-alphabet[25]=troisieme_lettre
-
-}
-flip++
-
-if (texte[a]=="A") {
-texte_changer.push(alphabet[0])
-}
-else if (texte[a]=="B") {
-texte_changer.push(alphabet[1])
-}
-else if (texte[a]=="C") {
-texte_changer.push(alphabet[2])
-}
-else if (texte[a]=="D") {
-texte_changer.push(alphabet[3])
-}
-else if (texte[a]=="E") {
-texte_changer.push(alphabet[4])
-}
-else if (texte[a]=="F") {
-texte_changer.push(alphabet[5])
-}
-else if (texte[a]=="G") {
-texte_changer.push(alphabet[6])
-}
-else if (texte[a]=="H") {
-texte_changer.push(alphabet[7])
-}
-else if (texte[a]=="I") {
-texte_changer.push(alphabet[8])
-}
-else if (texte[a]=="J") {
-texte_changer.push(alphabet[9])
-}
-else if (texte[a]=="K") {
-texte_changer.push(alphabet[10])
-}
-else if(texte[a]=="L") {
-texte_changer.push(alphabet[11])
-}
-else if (texte[a]=="M") {
-texte_changer.push(alphabet[12])
-}
-else if (texte[a]=="N") {
-texte_changer.push(alphabet[13])
-}
-else if (texte[a]=="O") {
-texte_changer.push(alphabet[14])
-}
-else if (texte[a]=="P") {
-texte_changer.push(alphabet[15])
-}
-else if(texte[a]=="Q") {
-texte_changer.push(alphabet[16])
-}
-else if(texte[a]=="R") {
-texte_changer.push(alphabet[17])
-}
-else if (texte[a]=="S") {
-texte_changer.push(alphabet[18])
-}
-else if(texte[a]=="T") {
-texte_changer.push(alphabet[19])
-}
-else if (texte[a]=="U") {
-texte_changer.push(alphabet[20])
-}
-else if(texte[a]=="V") {
-texte_changer.push(alphabet[21])
-}
-else if (texte[a]=="W") {
-texte_changer.push(alphabet[22])
-}
-else if(texte[a]=="X") {
-texte_changer.push(alphabet[23])
-}
-else if (texte[a]=="Y") {
-texte_changer.push(alphabet[24])
-}
-else if(texte[a]=="Z") {
-texte_changer.push(alphabet[25])
-}
-
-
-
-
-}
-cle_cryptage=melange_alphabet +  alphabet[parseInt(Math.random() * 24)] + parseInt(Math.random() * 24)
-document.getElementById("cle").style.color="red"
-document.getElementById("cle").innerHTML=cle_cryptage
-for (a=0 ; a<texte_changer.length;a++){
-fin=fin+texte_changer[a]
-}
-document.getElementById("resultat_cryptage").style.color="red"
-document.getElementById("resultat_cryptage").innerHTML=fin
-}
-
-
-function Decrypter() {
-
-var alphabet  = ["X" , "Y" , "Z" , "A" , "B" , "C" , "D" , "E" , "F", "G" , "H" , "I" , "J", "K" ,"L" ,"M" ,"N" ,"O" ,"P" ,"Q" ,"R" ,"S" ,"T" ,"U" ,"V" ,"W"]
-var cle_cryptage = document.getElementById("cle_decrypter").value
-if (cle_cryptage == ""){
-alert("veuillez rentrer une clé")
-}
-var texte = []
-var flip = 0
-var texte_changer=[]
-var p=0
-var fin = ""
-
-if (isNaN(cle_cryptage.charAt(1))== false ) {
-var melange_alphabet = 10*parseInt(cle_cryptage.charAt(0)) + parseInt(cle_cryptage.charAt(1))
-}
-else {
-var melange_alphabet = parseInt(cle_cryptage.charAt(0))
-}
-
-for(a=0 ; a < parseInt(melange_alphabet/2) +1  ; a++) {
-let changement = alphabet[a]
-alphabet[a]=alphabet[melange_alphabet-a]
-alphabet[melange_alphabet-a]=changement
-}
-var texte =[]
-var texte_changer=[]
-var flip = 0
-var fin = ""
-
-
-
-var texte_string=document.getElementById("texte_decrypter").value
-
-if (texte_string == "") {
-alert("veuillez rentrer un message à decrypter")
-}
-
-
-for (a=0 ; a<texte_string.length;a++){
-texte.push(texte_string.charAt(a))
-}
-
-for (a=0 ; a<texte.length ;a++){
-
-
-
-
-let premiere_lettre=alphabet[0]
-let deuxieme_lettre=alphabet[1]
-let troisieme_lettre=alphabet[2]
-let quatrieme_lettre=alphabet[3]
-let cinquieme_lettre=alphabet[4]
-let sixieme_lettre=alphabet[5]
-let setieme_lettre=alphabet[6]
-let huitieme_lettre=alphabet[7]
-let neuvieme_lettre=alphabet[8]
-let dixieme_lettre=alphabet[9]
-let onzieme_lettre=alphabet[10]
-let douxieme_lettre=alphabet[11]
-let tresieme_lettre=alphabet[12]
-let quatorzieme_lettre=alphabet[13]
-let quinzieme_lettre=alphabet[14]
-let seizieme_lettre=alphabet[15]
-let dix_septieme_lettre=alphabet[16]
-let dix_huitieme_lettre=alphabet[17]
-let dix_neufieme_lettre=alphabet[18]
-let vingtieme_lettre=alphabet[19]
-let vingt_unieme_lettre=alphabet[20]
-let vingt_deuxieme_lettre=alphabet[21]
-let vingtieme_troiseme_lettre=alphabet[22]
-let vingtieme_quatrieme_lettre=alphabet[23]
-let vingtieme_cinquieme_lettre=alphabet[24]
-let vingtieme_sixieme_lettre=alphabet[25]
-
-
-
-
-
-if (flip == 1){
-alphabet[0]=troisieme_lettre
-alphabet[1]=dixieme_lettre
-alphabet[2]=cinquieme_lettre
-alphabet[3]=sixieme_lettre
-alphabet[4]=setieme_lettre
-alphabet[5]=huitieme_lettre
-alphabet[6]=neuvieme_lettre
-alphabet[7]=dix_neufieme_lettre
-alphabet[8]=onzieme_lettre
-alphabet[9]=douxieme_lettre
-alphabet[10]=tresieme_lettre
-alphabet[11]=quatorzieme_lettre
-alphabet[12]=quinzieme_lettre
-alphabet[13]=seizieme_lettre
-alphabet[14]=dix_septieme_lettre
-alphabet[15]=dix_huitieme_lettre
-alphabet[16]=quatrieme_lettre
-alphabet[17]=vingtieme_lettre
-alphabet[18]=vingt_unieme_lettre
-alphabet[19]=vingt_deuxieme_lettre
-alphabet[20]=vingtieme_troiseme_lettre
-alphabet[21]=vingtieme_quatrieme_lettre
-alphabet[22]=vingtieme_cinquieme_lettre
-alphabet[23]=vingtieme_sixieme_lettre
-alphabet[24]=premiere_lettre
-alphabet[25]=deuxieme_lettre
-}
-
-
-
-
-else if (flip == 3) {
-alphabet[0]=troisieme_lettre
-alphabet[1]=quatrieme_lettre
-alphabet[2]=cinquieme_lettre
-alphabet[3]=sixieme_lettre
-alphabet[4]=setieme_lettre
-alphabet[5]=huitieme_lettre
-alphabet[6]=neuvieme_lettre
-alphabet[7]=dixieme_lettre
-alphabet[8]=onzieme_lettre
-alphabet[9]=douxieme_lettre
-alphabet[10]=tresieme_lettre
-alphabet[11]=quatorzieme_lettre
-alphabet[12]=quinzieme_lettre
-alphabet[13]=seizieme_lettre
-alphabet[14]=dix_septieme_lettre
-alphabet[15]=dix_huitieme_lettre
-alphabet[16]=dix_neufieme_lettre
-alphabet[17]=vingtieme_lettre
-alphabet[18]=vingt_unieme_lettre
-alphabet[19]=vingt_deuxieme_lettre
-alphabet[20]=vingtieme_troiseme_lettre
-alphabet[21]=vingtieme_quatrieme_lettre
-alphabet[22]=vingtieme_cinquieme_lettre
-alphabet[23]=vingtieme_sixieme_lettre
-alphabet[24]=premiere_lettre
-alphabet[25]=deuxieme_lettre
-flip = 0
-}
-
-else {
-alphabet[0]=quatrieme_lettre
-alphabet[1]=cinquieme_lettre
-alphabet[2]=sixieme_lettre
-alphabet[3]=setieme_lettre
-alphabet[4]=huitieme_lettre
-alphabet[5]=neuvieme_lettre
-alphabet[6]=dixieme_lettre
-alphabet[7]=onzieme_lettre
-alphabet[8]=douxieme_lettre
-alphabet[9]=tresieme_lettre
-alphabet[10]=quatorzieme_lettre
-alphabet[11]=quinzieme_lettre
-alphabet[12]=seizieme_lettre
-alphabet[13]=dix_septieme_lettre
-alphabet[14]=dix_huitieme_lettre
-alphabet[15]=dix_neufieme_lettre
-alphabet[16]=vingtieme_lettre
-alphabet[17]=vingt_unieme_lettre
-alphabet[18]=vingt_deuxieme_lettre
-alphabet[19]=vingtieme_troiseme_lettre
-alphabet[20]=vingtieme_quatrieme_lettre
-alphabet[21]=vingtieme_cinquieme_lettre
-alphabet[22]=vingtieme_sixieme_lettre
-alphabet[23]=premiere_lettre
-alphabet[24]=deuxieme_lettre
-alphabet[25]=troisieme_lettre
-
-}
-
-flip++
-restitution=alphabet.indexOf(texte[p]) 
-
-p++
-
-if (restitution == 0) {
-texte_changer.push("A")
-}
-else if (restitution == 1) {
-texte_changer.push("B")
-}
-else if (restitution == 2) {
-texte_changer.push("C")
-}
-else if (restitution == 3) {
-texte_changer.push("D")
-}
-else if (restitution == 4) {
-texte_changer.push("E")
-}
-else if (restitution == 5) {
-texte_changer.push("F")
-}
-else if(restitution == 6) {
-texte_changer.push("G")
-}
-else if(restitution == 7) {
-texte_changer.push("H")
-}
-else if (restitution == 8) {
-texte_changer.push("I")
-}
-else if(restitution == 9) {
-texte_changer.push("J")
-}
-else if(restitution == 10) {
-texte_changer.push("K")
-}
-else if (restitution == 11) {
-texte_changer.push("L")
-}
-else if (restitution == 12) {
-texte_changer.push("M")
-}
-else if (restitution == 13) {
-texte_changer.push("N")
-}
-else if(restitution == 14) {
-texte_changer.push("O")
-}
-else if(restitution == 15) {
-texte_changer.push("P")
-}
-else if (restitution == 16) {
-texte_changer.push("Q")
-}
-else if (restitution == 17) {
-texte_changer.push("R")
-}
-else if (restitution == 18) {
-texte_changer.push("S")
-}
-else if(restitution == 19) {
-texte_changer.push("T")
-}
-else if (restitution == 20) {
-texte_changer.push("U")
-}
-else if (restitution == 21) {
-texte_changer.push("V")
-}
-else if (restitution == 22) {
-texte_changer.push("W")
-}
-else if (restitution == 23) {
-texte_changer.push("X")
-}
-else if (restitution == 24) {
-texte_changer.push("Y")
-}
-else if(restitution == 25) {
-texte_changer.push("Z")
-}
-
-
-
-
-
-}
-for (a=0 ; a<texte_changer.length;a++){
-fin=fin + texte_changer[a]
-}
-document.getElementById("resultat_decryptage").style.color="red"
-document.getElementById("resultat_decryptage").innerHTML=fin
-
-}
-</script>
-</body>
-</html>
+
+  var texte_string=document.getElementById("texte_crypter").value.toUpperCase()
+  texte_string=texte_string.replace(/(\W)/g,"")
+
+  for ( a=0 ; a<texte_string.length ;a++) {
+  if (isNaN(texte_string.charAt(a))== false ) {
+  alert("Votre message ne doit pas contenir de nombre ")
+  return;
+  }
+  }
+
+
+  for (a=0 ; a<texte_string.length;a++){
+  texte.push(texte_string.charAt(a))
+  }
+
+  for (a=0 ; a<texte.length ;a++){
+
+
+
+
+  let premiere_lettre=alphabet[0]
+  let deuxieme_lettre=alphabet[1]
+  let troisieme_lettre=alphabet[2]
+  let quatrieme_lettre=alphabet[3]
+  let cinquieme_lettre=alphabet[4]
+  let sixieme_lettre=alphabet[5]
+  let setieme_lettre=alphabet[6]
+  let huitieme_lettre=alphabet[7]
+  let neuvieme_lettre=alphabet[8]
+  let dixieme_lettre=alphabet[9]
+  let onzieme_lettre=alphabet[10]
+  let douxieme_lettre=alphabet[11]
+  let tresieme_lettre=alphabet[12]
+  let quatorzieme_lettre=alphabet[13]
+  let quinzieme_lettre=alphabet[14]
+  let seizieme_lettre=alphabet[15]
+  let dix_septieme_lettre=alphabet[16]
+  let dix_huitieme_lettre=alphabet[17]
+  let dix_neufieme_lettre=alphabet[18]
+  let vingtieme_lettre=alphabet[19]
+  let vingt_unieme_lettre=alphabet[20]
+  let vingt_deuxieme_lettre=alphabet[21]
+  let vingtieme_troiseme_lettre=alphabet[22]
+  let vingtieme_quatrieme_lettre=alphabet[23]
+  let vingtieme_cinquieme_lettre=alphabet[24]
+  let vingtieme_sixieme_lettre=alphabet[25]
+
+
+
+
+
+  if (flip == 1){
+  alphabet[0]=troisieme_lettre
+  alphabet[1]=dixieme_lettre
+  alphabet[2]=cinquieme_lettre
+  alphabet[3]=sixieme_lettre
+  alphabet[4]=setieme_lettre
+  alphabet[5]=huitieme_lettre
+  alphabet[6]=neuvieme_lettre
+  alphabet[7]=dix_neufieme_lettre
+  alphabet[8]=onzieme_lettre
+  alphabet[9]=douxieme_lettre
+  alphabet[10]=tresieme_lettre
+  alphabet[11]=quatorzieme_lettre
+  alphabet[12]=quinzieme_lettre
+  alphabet[13]=seizieme_lettre
+  alphabet[14]=dix_septieme_lettre
+  alphabet[15]=dix_huitieme_lettre
+  alphabet[16]=quatrieme_lettre
+  alphabet[17]=vingtieme_lettre
+  alphabet[18]=vingt_unieme_lettre
+  alphabet[19]=vingt_deuxieme_lettre
+  alphabet[20]=vingtieme_troiseme_lettre
+  alphabet[21]=vingtieme_quatrieme_lettre
+  alphabet[22]=vingtieme_cinquieme_lettre
+  alphabet[23]=vingtieme_sixieme_lettre
+  alphabet[24]=premiere_lettre
+  alphabet[25]=deuxieme_lettre
+  }
+
+
+
+
+  else if (flip == 3) {
+  alphabet[0]=troisieme_lettre
+  alphabet[1]=quatrieme_lettre
+  alphabet[2]=cinquieme_lettre
+  alphabet[3]=sixieme_lettre
+  alphabet[4]=setieme_lettre
+  alphabet[5]=huitieme_lettre
+  alphabet[6]=neuvieme_lettre
+  alphabet[7]=dixieme_lettre
+  alphabet[8]=onzieme_lettre
+  alphabet[9]=douxieme_lettre
+  alphabet[10]=tresieme_lettre
+  alphabet[11]=quatorzieme_lettre
+  alphabet[12]=quinzieme_lettre
+  alphabet[13]=seizieme_lettre
+  alphabet[14]=dix_septieme_lettre
+  alphabet[15]=dix_huitieme_lettre
+  alphabet[16]=dix_neufieme_lettre
+  alphabet[17]=vingtieme_lettre
+  alphabet[18]=vingt_unieme_lettre
+  alphabet[19]=vingt_deuxieme_lettre
+  alphabet[20]=vingtieme_troiseme_lettre
+  alphabet[21]=vingtieme_quatrieme_lettre
+  alphabet[22]=vingtieme_cinquieme_lettre
+  alphabet[23]=vingtieme_sixieme_lettre
+  alphabet[24]=premiere_lettre
+  alphabet[25]=deuxieme_lettre
+  flip = 0
+  }
+
+  else {
+  alphabet[0]=quatrieme_lettre
+  alphabet[1]=cinquieme_lettre
+  alphabet[2]=sixieme_lettre
+  alphabet[3]=setieme_lettre
+  alphabet[4]=huitieme_lettre
+  alphabet[5]=neuvieme_lettre
+  alphabet[6]=dixieme_lettre
+  alphabet[7]=onzieme_lettre
+  alphabet[8]=douxieme_lettre
+  alphabet[9]=tresieme_lettre
+  alphabet[10]=quatorzieme_lettre
+  alphabet[11]=quinzieme_lettre
+  alphabet[12]=seizieme_lettre
+  alphabet[13]=dix_septieme_lettre
+  alphabet[14]=dix_huitieme_lettre
+  alphabet[15]=dix_neufieme_lettre
+  alphabet[16]=vingtieme_lettre
+  alphabet[17]=vingt_unieme_lettre
+  alphabet[18]=vingt_deuxieme_lettre
+  alphabet[19]=vingtieme_troiseme_lettre
+  alphabet[20]=vingtieme_quatrieme_lettre
+  alphabet[21]=vingtieme_cinquieme_lettre
+  alphabet[22]=vingtieme_sixieme_lettre
+  alphabet[23]=premiere_lettre
+  alphabet[24]=deuxieme_lettre
+  alphabet[25]=troisieme_lettre
+
+  }
+  flip++
+
+  if (texte[a]=="A") {
+  texte_changer.push(alphabet[0])
+  }
+  else if (texte[a]=="B") {
+  texte_changer.push(alphabet[1])
+  }
+  else if (texte[a]=="C") {
+  texte_changer.push(alphabet[2])
+  }
+  else if (texte[a]=="D") {
+  texte_changer.push(alphabet[3])
+  }
+  else if (texte[a]=="E") {
+  texte_changer.push(alphabet[4])
+  }
+  else if (texte[a]=="F") {
+  texte_changer.push(alphabet[5])
+  }
+  else if (texte[a]=="G") {
+  texte_changer.push(alphabet[6])
+  }
+  else if (texte[a]=="H") {
+  texte_changer.push(alphabet[7])
+  }
+  else if (texte[a]=="I") {
+  texte_changer.push(alphabet[8])
+  }
+  else if (texte[a]=="J") {
+  texte_changer.push(alphabet[9])
+  }
+  else if (texte[a]=="K") {
+  texte_changer.push(alphabet[10])
+  }
+  else if(texte[a]=="L") {
+  texte_changer.push(alphabet[11])
+  }
+  else if (texte[a]=="M") {
+  texte_changer.push(alphabet[12])
+  }
+  else if (texte[a]=="N") {
+  texte_changer.push(alphabet[13])
+  }
+  else if (texte[a]=="O") {
+  texte_changer.push(alphabet[14])
+  }
+  else if (texte[a]=="P") {
+  texte_changer.push(alphabet[15])
+  }
+  else if(texte[a]=="Q") {
+  texte_changer.push(alphabet[16])
+  }
+  else if(texte[a]=="R") {
+  texte_changer.push(alphabet[17])
+  }
+  else if (texte[a]=="S") {
+  texte_changer.push(alphabet[18])
+  }
+  else if(texte[a]=="T") {
+  texte_changer.push(alphabet[19])
+  }
+  else if (texte[a]=="U") {
+  texte_changer.push(alphabet[20])
+  }
+  else if(texte[a]=="V") {
+  texte_changer.push(alphabet[21])
+  }
+  else if (texte[a]=="W") {
+  texte_changer.push(alphabet[22])
+  }
+  else if(texte[a]=="X") {
+  texte_changer.push(alphabet[23])
+  }
+  else if (texte[a]=="Y") {
+  texte_changer.push(alphabet[24])
+  }
+  else if(texte[a]=="Z") {
+  texte_changer.push(alphabet[25])
+  }
+
+
+
+
+  }
+  cle_cryptage=melange_alphabet +  alphabet[parseInt(Math.random() * 24)] + parseInt(Math.random() * 24)
+  document.getElementById("cle").style.color="red"
+  document.getElementById("cle").innerHTML=cle_cryptage
+  for (a=0 ; a<texte_changer.length;a++){
+  fin=fin+texte_changer[a]
+  }
+  document.getElementById("resultat_cryptage").style.color="red"
+  document.getElementById("resultat_cryptage").innerHTML=fin
+  }
+
+
+  function Decrypter() {
+
+  var alphabet  = ["X" , "Y" , "Z" , "A" , "B" , "C" , "D" , "E" , "F", "G" , "H" , "I" , "J", "K" ,"L" ,"M" ,"N" ,"O" ,"P" ,"Q" ,"R" ,"S" ,"T" ,"U" ,"V" ,"W"]
+  var cle_cryptage = document.getElementById("cle_decrypter").value
+  if (cle_cryptage == ""){
+  alert("veuillez rentrer une clé")
+  }
+  var texte = []
+  var flip = 0
+  var texte_changer=[]
+  var p=0
+  var fin = ""
+
+  if (isNaN(cle_cryptage.charAt(1))== false ) {
+  var melange_alphabet = 10*parseInt(cle_cryptage.charAt(0)) + parseInt(cle_cryptage.charAt(1))
+  }
+  else {
+  var melange_alphabet = parseInt(cle_cryptage.charAt(0))
+  }
+
+  for(a=0 ; a < parseInt(melange_alphabet/2) +1  ; a++) {
+  let changement = alphabet[a]
+  alphabet[a]=alphabet[melange_alphabet-a]
+  alphabet[melange_alphabet-a]=changement
+  }
+  var texte =[]
+  var texte_changer=[]
+  var flip = 0
+  var fin = ""
+
+
+
+  var texte_string=document.getElementById("texte_decrypter").value
+
+  if (texte_string == "") {
+  alert("veuillez rentrer un message à decrypter")
+  }
+
+
+  for (a=0 ; a<texte_string.length;a++){
+  texte.push(texte_string.charAt(a))
+  }
+
+  for (a=0 ; a<texte.length ;a++){
+
+
+
+
+  let premiere_lettre=alphabet[0]
+  let deuxieme_lettre=alphabet[1]
+  let troisieme_lettre=alphabet[2]
+  let quatrieme_lettre=alphabet[3]
+  let cinquieme_lettre=alphabet[4]
+  let sixieme_lettre=alphabet[5]
+  let setieme_lettre=alphabet[6]
+  let huitieme_lettre=alphabet[7]
+  let neuvieme_lettre=alphabet[8]
+  let dixieme_lettre=alphabet[9]
+  let onzieme_lettre=alphabet[10]
+  let douxieme_lettre=alphabet[11]
+  let tresieme_lettre=alphabet[12]
+  let quatorzieme_lettre=alphabet[13]
+  let quinzieme_lettre=alphabet[14]
+  let seizieme_lettre=alphabet[15]
+  let dix_septieme_lettre=alphabet[16]
+  let dix_huitieme_lettre=alphabet[17]
+  let dix_neufieme_lettre=alphabet[18]
+  let vingtieme_lettre=alphabet[19]
+  let vingt_unieme_lettre=alphabet[20]
+  let vingt_deuxieme_lettre=alphabet[21]
+  let vingtieme_troiseme_lettre=alphabet[22]
+  let vingtieme_quatrieme_lettre=alphabet[23]
+  let vingtieme_cinquieme_lettre=alphabet[24]
+  let vingtieme_sixieme_lettre=alphabet[25]
+
+
+
+
+
+  if (flip == 1){
+  alphabet[0]=troisieme_lettre
+  alphabet[1]=dixieme_lettre
+  alphabet[2]=cinquieme_lettre
+  alphabet[3]=sixieme_lettre
+  alphabet[4]=setieme_lettre
+  alphabet[5]=huitieme_lettre
+  alphabet[6]=neuvieme_lettre
+  alphabet[7]=dix_neufieme_lettre
+  alphabet[8]=onzieme_lettre
+  alphabet[9]=douxieme_lettre
+  alphabet[10]=tresieme_lettre
+  alphabet[11]=quatorzieme_lettre
+  alphabet[12]=quinzieme_lettre
+  alphabet[13]=seizieme_lettre
+  alphabet[14]=dix_septieme_lettre
+  alphabet[15]=dix_huitieme_lettre
+  alphabet[16]=quatrieme_lettre
+  alphabet[17]=vingtieme_lettre
+  alphabet[18]=vingt_unieme_lettre
+  alphabet[19]=vingt_deuxieme_lettre
+  alphabet[20]=vingtieme_troiseme_lettre
+  alphabet[21]=vingtieme_quatrieme_lettre
+  alphabet[22]=vingtieme_cinquieme_lettre
+  alphabet[23]=vingtieme_sixieme_lettre
+  alphabet[24]=premiere_lettre
+  alphabet[25]=deuxieme_lettre
+  }
+
+
+
+
+  else if (flip == 3) {
+  alphabet[0]=troisieme_lettre
+  alphabet[1]=quatrieme_lettre
+  alphabet[2]=cinquieme_lettre
+  alphabet[3]=sixieme_lettre
+  alphabet[4]=setieme_lettre
+  alphabet[5]=huitieme_lettre
+  alphabet[6]=neuvieme_lettre
+  alphabet[7]=dixieme_lettre
+  alphabet[8]=onzieme_lettre
+  alphabet[9]=douxieme_lettre
+  alphabet[10]=tresieme_lettre
+  alphabet[11]=quatorzieme_lettre
+  alphabet[12]=quinzieme_lettre
+  alphabet[13]=seizieme_lettre
+  alphabet[14]=dix_septieme_lettre
+  alphabet[15]=dix_huitieme_lettre
+  alphabet[16]=dix_neufieme_lettre
+  alphabet[17]=vingtieme_lettre
+  alphabet[18]=vingt_unieme_lettre
+  alphabet[19]=vingt_deuxieme_lettre
+  alphabet[20]=vingtieme_troiseme_lettre
+  alphabet[21]=vingtieme_quatrieme_lettre
+  alphabet[22]=vingtieme_cinquieme_lettre
+  alphabet[23]=vingtieme_sixieme_lettre
+  alphabet[24]=premiere_lettre
+  alphabet[25]=deuxieme_lettre
+  flip = 0
+  }
+
+  else {
+  alphabet[0]=quatrieme_lettre
+  alphabet[1]=cinquieme_lettre
+  alphabet[2]=sixieme_lettre
+  alphabet[3]=setieme_lettre
+  alphabet[4]=huitieme_lettre
+  alphabet[5]=neuvieme_lettre
+  alphabet[6]=dixieme_lettre
+  alphabet[7]=onzieme_lettre
+  alphabet[8]=douxieme_lettre
+  alphabet[9]=tresieme_lettre
+  alphabet[10]=quatorzieme_lettre
+  alphabet[11]=quinzieme_lettre
+  alphabet[12]=seizieme_lettre
+  alphabet[13]=dix_septieme_lettre
+  alphabet[14]=dix_huitieme_lettre
+  alphabet[15]=dix_neufieme_lettre
+  alphabet[16]=vingtieme_lettre
+  alphabet[17]=vingt_unieme_lettre
+  alphabet[18]=vingt_deuxieme_lettre
+  alphabet[19]=vingtieme_troiseme_lettre
+  alphabet[20]=vingtieme_quatrieme_lettre
+  alphabet[21]=vingtieme_cinquieme_lettre
+  alphabet[22]=vingtieme_sixieme_lettre
+  alphabet[23]=premiere_lettre
+  alphabet[24]=deuxieme_lettre
+  alphabet[25]=troisieme_lettre
+
+  }
+
+  flip++
+  restitution=alphabet.indexOf(texte[p]) 
+
+  p++
+
+  if (restitution == 0) {
+  texte_changer.push("A")
+  }
+  else if (restitution == 1) {
+  texte_changer.push("B")
+  }
+  else if (restitution == 2) {
+  texte_changer.push("C")
+  }
+  else if (restitution == 3) {
+  texte_changer.push("D")
+  }
+  else if (restitution == 4) {
+  texte_changer.push("E")
+  }
+  else if (restitution == 5) {
+  texte_changer.push("F")
+  }
+  else if(restitution == 6) {
+  texte_changer.push("G")
+  }
+  else if(restitution == 7) {
+  texte_changer.push("H")
+  }
+  else if (restitution == 8) {
+  texte_changer.push("I")
+  }
+  else if(restitution == 9) {
+  texte_changer.push("J")
+  }
+  else if(restitution == 10) {
+  texte_changer.push("K")
+  }
+  else if (restitution == 11) {
+  texte_changer.push("L")
+  }
+  else if (restitution == 12) {
+  texte_changer.push("M")
+  }
+  else if (restitution == 13) {
+  texte_changer.push("N")
+  }
+  else if(restitution == 14) {
+  texte_changer.push("O")
+  }
+  else if(restitution == 15) {
+  texte_changer.push("P")
+  }
+  else if (restitution == 16) {
+  texte_changer.push("Q")
+  }
+  else if (restitution == 17) {
+  texte_changer.push("R")
+  }
+  else if (restitution == 18) {
+  texte_changer.push("S")
+  }
+  else if(restitution == 19) {
+  texte_changer.push("T")
+  }
+  else if (restitution == 20) {
+  texte_changer.push("U")
+  }
+  else if (restitution == 21) {
+  texte_changer.push("V")
+  }
+  else if (restitution == 22) {
+  texte_changer.push("W")
+  }
+  else if (restitution == 23) {
+  texte_changer.push("X")
+  }
+  else if (restitution == 24) {
+  texte_changer.push("Y")
+  }
+  else if(restitution == 25) {
+  texte_changer.push("Z")
+  }
+
+
+
+
+
+  }
+  for (a=0 ; a<texte_changer.length;a++){
+  fin=fin + texte_changer[a]
+  }
+  document.getElementById("resultat_decryptage").style.color="red"
+  document.getElementById("resultat_decryptage").innerHTML=fin
+
+  }
+  </script>
+  </body>
+  </html>

@@ -25,10 +25,10 @@
 
 
    
-		  
+      
 
 
-		  
+      
 
       
       <div id="Fin" style="display:none;" >
@@ -78,8 +78,8 @@
     </div>
     
     <div id="patienter">
-	
-	</div>
+  
+  </div>
     <input id="Recommencer" value="Recommencer" type="button" onclick="javascript:location.reload();" style="display:none;"> </input>
     
     
@@ -112,10 +112,10 @@
   <center><strong><big>Stéganographie : </big></strong></center>
   <h1>
       <br>
-	<br>
+  <br>
     Ceci est un programme permettant de retrouver un message dans une autre image
     <br>
-	<br>
+  <br>
     Si vous voulez des explications sur le fonctionnement du programme cliquez  <a href="Explication_Steganographie_retrouve_message.html"  target="_blank"> ici </a>
 
 
@@ -144,15 +144,15 @@
     var ctx = canvas.getContext("2d");
       
     var point = 1
-	var finit_patienter ="non"
-	
+  var finit_patienter ="non"
+  
     var values_r= ""
     var values_v=""
     var values_b=""
     var values_o=""
 
     var reconstitution_worker=1
-	
+  
     function onChange(sender)
     {
      
@@ -178,7 +178,7 @@
         canvas.style.maxHeight = '800px';
         ctx.drawImage(img, 0, 0);
         PixelsImage = ctx.getImageData(0, 0, img.width, img.height);
-		canvas.style.borderStyle="ridge ridge ridge ridge" ;
+    canvas.style.borderStyle="ridge ridge ridge ridge" ;
           
           ctx.putImageData(PixelsImage, 0, 0);
         }
@@ -285,63 +285,63 @@ timerpreparation=setTimeout(affichage,750)
 
        w.postMessage(PixelsImage.data);
        
-	   
+     
 
-	   
-	   
-	   
-	   
-	   
-	   w.onmessage=function(event){
+     
+     
+     
+     
+     
+     w.onmessage=function(event){
 
-	   		if (reconstitution_worker==8) {
+        if (reconstitution_worker==8) {
         opacite=event.data
-		w.terminate()
-		Etape_2 ()
-				clearInterval(timerpreparation)
-		document.getElementById("patienter").innerHTML=""
-		finit_patienter="oui"
-		}
-	   				 
-		if (reconstitution_worker==7) {
+    w.terminate()
+    Etape_2 ()
+        clearInterval(timerpreparation)
+    document.getElementById("patienter").innerHTML=""
+    finit_patienter="oui"
+    }
+             
+    if (reconstitution_worker==7) {
         values_o=event.data
-		reconstitution_worker=8
-		}	
-	   		if (reconstitution_worker==6) {
+    reconstitution_worker=8
+    } 
+        if (reconstitution_worker==6) {
         bleu=event.data
-		reconstitution_worker=7
-		}
-	   		if (reconstitution_worker==5) {
+    reconstitution_worker=7
+    }
+        if (reconstitution_worker==5) {
         values_b=event.data
-		reconstitution_worker=6
-		}	
-	   		if (reconstitution_worker==4) {
+    reconstitution_worker=6
+    } 
+        if (reconstitution_worker==4) {
         vert=event.data
-		reconstitution_worker=5
-		}	
-	   		if (reconstitution_worker==3) {
+    reconstitution_worker=5
+    } 
+        if (reconstitution_worker==3) {
         values_v=event.data
-		reconstitution_worker=4
-		}
-	     if (reconstitution_worker==2) {
+    reconstitution_worker=4
+    }
+       if (reconstitution_worker==2) {
         rouge=event.data
-		reconstitution_worker=3
-		}	
-		if (reconstitution_worker==1) {
+    reconstitution_worker=3
+    } 
+    if (reconstitution_worker==1) {
         values_r=event.data
-		reconstitution_worker=2
-		}
-		
-		 
-		 
-	 
-	 
-	 
+    reconstitution_worker=2
+    }
+    
+     
+     
+   
+   
+   
 
 
 
-	   
-	   
+     
+     
 } 
 
 
@@ -417,4 +417,4 @@ values_o=values_o.toString();
 </script>
 
 
-</body></html>
+  </body></html>

@@ -1,287 +1,287 @@
 <!DOCTYPE html>
-<html lang="fr"><head>
-<meta http-equiv="content-type" content="text/html"; >
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="Ficher_Principal.css" />
-<title>Cacher une image dans une autre image</title>
+  <html lang="fr"><head>
+  <meta http-equiv="content-type" content="text/html"; >
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="Ficher_Principal.css" />
+  <title>Cacher une image dans une autre image</title>
 
-</head>
-  <body>
-<a id="page_principal" href="Page_Principal.html" target="_parent"> <img src="Home-512.png"> </img> </a>
+  </head>
+    <body>
+  <a id="page_principal" href="Page_Principal.html" target="_parent"> <img src="Home-512.png"> </img> </a>
 
-   <div id="titre" class="titre" style="display:none;"> <!-- Le titre des etapes --> 
-</div>
+     <div id="titre" class="titre" style="display:none;"> <!-- Le titre des etapes --> 
+  </div>
 
-<div id="Etape" class="Etape" style="display:none;"> 
-</div>
+  <div id="Etape" class="Etape" style="display:none;"> 
+  </div>
 
-<div id="Upload_c" class="Upload_cacher" style="display:none;" >
- <input id="file" type="file" onchange="onChange(this)">
-</div>
+  <div id="Upload_c" class="Upload_cacher" style="display:none;" >
+   <input id="file" type="file" onchange="onChange(this)">
+  </div>
 
-<div id="Upload1" class="Upload_cacher" style="display:none;" >
- <input id="file1" type="file" onchange="onChange1(this)">
-</div>
+  <div id="Upload1" class="Upload_cacher" style="display:none;" >
+   <input id="file1" type="file" onchange="onChange1(this)">
+  </div>
 
-<div id="image_upload" style="display:none;">
-<canvas id="monCanvas_c" style="display:none;"> </canvas>
-<canvas id="monCanvas1" style="display:none;"> </canvas>
-</div>
-<div id="explication" class="premiere_page" >
+  <div id="image_upload" style="display:none;">
+  <canvas id="monCanvas_c" style="display:none;"> </canvas>
+  <canvas id="monCanvas1" style="display:none;"> </canvas>
+  </div>
+  <div id="explication" class="premiere_page" >
 
-  <center><strong><big>Cacher une image dans une autre image : </big></strong></center>
-  <h1>
+    <center><strong><big>Cacher une image dans une autre image : </big></strong></center>
+    <h1>
 
-	<br>
-	Veuillez sélectionner le mode de cryptage     
-    <select name="Liste" id="choix_id" >
-    <option value="1" >Mode 1</option>
-    <option value="2"  >Mode 2</option> 
-    </select>
-   <br>
-   Si vous voulez des explications cliquez <a href="Explication cacher une image.html"  target="_blank"> ici </a>
-   <br>
-   <br>
-   <font onclick="Quelle_mode_choisir ()"  style="text-decoration:underline; color:blue;" > Quel mode choisir ? </font>
-    <input value="C'est parti !" onclick="Etape_1()" maxlength="11" type="button" id="parti" >
+  	<br>
+  	Veuillez sélectionner le mode de cryptage     
+      <select name="Liste" id="choix_id" >
+      <option value="1" >Mode 1</option>
+      <option value="2"  >Mode 2</option> 
+      </select>
+     <br>
+     Si vous voulez des explications cliquez <a href="Explication cacher une image.html"  target="_blank"> ici </a>
+     <br>
+     <br>
+     <font onclick="Quelle_mode_choisir ()"  style="text-decoration:underline; color:blue;" > Quel mode choisir ? </font>
+      <input value="C'est parti !" onclick="Etape_1()" maxlength="11" type="button" id="parti" >
 
-  </h1>
-</div>
+    </h1>
+  </div>
 
-<div id="suivante">
-  <input class= "Suivante" value="Etape Suivante" onclick="passer_1()" maxlength="110" type="button" id="Suivante_1"  style="display:none;">
-</div>
+  <div id="suivante">
+    <input class= "Suivante" value="Etape Suivante" onclick="passer_1()" maxlength="110" type="button" id="Suivante_1"  style="display:none;">
+  </div>
 
-<input id="Recommencer" value="Recommencer" type="button" onclick="javascript:location.reload();" style="display:none;"> </input>
-<div id="probleme" >
-</div>
-</div>
+  <input id="Recommencer" value="Recommencer" type="button" onclick="javascript:location.reload();" style="display:none;"> </input>
+  <div id="probleme" >
+  </div>
+  </div>
 
-<script type="text/javascript">
- const allowedTypes = ["image/png", "image/jpg", "image/jpeg", "image/gif"];     
-var canvas = document.getElementById("monCanvas_c");
-var canvas1 = document.getElementById("monCanvas1");
-var ctx = canvas.getContext("2d");
-var ctx1 = canvas1.getContext("2d");
-var PixelsImage_image_a_cacher = []
-var PixelsImage = []
-var Etape=0
-var choix
+  <script type="text/javascript">
+   const allowedTypes = ["image/png", "image/jpg", "image/jpeg", "image/gif"];     
+  var canvas = document.getElementById("monCanvas_c");
+  var canvas1 = document.getElementById("monCanvas1");
+  var ctx = canvas.getContext("2d");
+  var ctx1 = canvas1.getContext("2d");
+  var PixelsImage_image_a_cacher = []
+  var PixelsImage = []
+  var Etape=0
+  var choix
 
-function Quelle_mode_choisir () {
-alert("Nous vous conseillons le mode 1 , le mode 2 est incomplet")
-}
-
-
-function Etape_1 (){
-document.getElementById("Suivante_1").style.display="block";
-document.getElementById("explication").style.display="none";
-document.getElementById("monCanvas_c").style.display="block";
-document.getElementById("monCanvas1").style.display="block";
-document.getElementById("titre").style.display="block";
-document.getElementById("titre").innerHTML="Etape 1"
-document.getElementById("Etape").style.display="block";
-document.getElementById("Etape").innerHTML="Ici , vous devez choisir les images , celle de droite correspond à l'image qui va être cacher dans l'image de gauche"
-document.getElementById("Upload_c").style.display="block"
-document.getElementById("Upload1").style.display="block"
-document.getElementById("image_upload").style.display="block"
-
-}
-
-function Etape_2() {
-  document.getElementById("Suivante_1").style.display="none"
-  document.getElementById("titre").innerHTML="Etape 2"
-  document.getElementById("probleme").innerHTML=""
-  document.getElementById("Etape").innerHTML="Voilà le résultat final"
-  document.getElementById("Upload_c").style.display="none"
-  document.getElementById("Upload1").style.display="none"
-  document.getElementById("monCanvas_c").style.marginLeft="25%"
-  document.getElementById("monCanvas1").style.display="none"
-  document.getElementById("Recommencer").style.display="block";
-  
-} 
-
-
-function passer_1() {
-  if (Etape == 2 ) {
-  choix = document.getElementById("choix_id").options[document.getElementById('choix_id').selectedIndex].value
-    go ()
+  function Quelle_mode_choisir () {
+  alert("Nous vous conseillons le mode 1 , le mode 2 est incomplet")
   }
-  else   {
-    document.getElementById("probleme").style.color="red"
-    document.getElementById("probleme").innerHTML = "Veuillez uploader les images avant"
-  }
-} 
 
 
-function onChange(sender)
-{
- 
-  
-  var file = sender.files[0];
-  var fileType = file["type"];
-  if(allowedTypes.indexOf(fileType) == -1)
-  {
-    alert("Format du fichier invalide. Les formats acceptés sont : gif, jpeg, png. ");
+  function Etape_1 (){
+  document.getElementById("Suivante_1").style.display="block";
+  document.getElementById("explication").style.display="none";
+  document.getElementById("monCanvas_c").style.display="block";
+  document.getElementById("monCanvas1").style.display="block";
+  document.getElementById("titre").style.display="block";
+  document.getElementById("titre").innerHTML="Etape 1"
+  document.getElementById("Etape").style.display="block";
+  document.getElementById("Etape").innerHTML="Ici , vous devez choisir les images , celle de droite correspond à l'image qui va être cacher dans l'image de gauche"
+  document.getElementById("Upload_c").style.display="block"
+  document.getElementById("Upload1").style.display="block"
+  document.getElementById("image_upload").style.display="block"
+
   }
-  else
-  {
-    var reader = new FileReader();
-    reader.onload = function(e)
-    {
-      var img = new Image();
-      img.src = e.target.result;
-      img.onload = function()
-      {
-        ctx.canvas.width = img.width;
-        ctx.canvas.height = img.height;
-        canvas.style.maxWidth = '800px';
-        canvas.style.maxHeight = '600px';
-        ctx.drawImage(img, 0, 0);
-        PixelsImage = ctx.getImageData(0, 0, img.width, img.height);
-        canvas.style.borderStyle="ridge ridge ridge ridge" ;
-        ctx.putImageData(PixelsImage, 0, 0);
-      }
-    };
-    reader.readAsDataURL(file);
+
+  function Etape_2() {
+    document.getElementById("Suivante_1").style.display="none"
+    document.getElementById("titre").innerHTML="Etape 2"
+    document.getElementById("probleme").innerHTML=""
+    document.getElementById("Etape").innerHTML="Voilà le résultat final"
+    document.getElementById("Upload_c").style.display="none"
+    document.getElementById("Upload1").style.display="none"
+    document.getElementById("monCanvas_c").style.marginLeft="25%"
+    document.getElementById("monCanvas1").style.display="none"
+    document.getElementById("Recommencer").style.display="block";
     
-  }
-Etape ++
-
-}
+  } 
 
 
-function onChange1(sender)
-{
+  function passer_1() {
+    if (Etape == 2 ) {
+    choix = document.getElementById("choix_id").options[document.getElementById('choix_id').selectedIndex].value
+      go ()
+    }
+    else   {
+      document.getElementById("probleme").style.color="red"
+      document.getElementById("probleme").innerHTML = "Veuillez uploader les images avant"
+    }
+  } 
+
+
+  function onChange(sender)
+  {
    
-	
-	var file = sender.files[0];
+    
+    var file = sender.files[0];
     var fileType = file["type"];
     if(allowedTypes.indexOf(fileType) == -1)
     {
-        alert("Format du fichier invalide. Les formats acceptés sont : gif, jpeg, png. ");
+      alert("Format du fichier invalide. Les formats acceptés sont : gif, jpeg, png. ");
     }
     else
     {
-        var reader = new FileReader();
-        reader.onload = function(e)
-{
-    var img1 = new Image();
-    img1.src = e.target.result
-    img1.onload = function()
-    {
-
-        canvas1.width = img1.width;
-        canvas1.height = img1.height;
-        canvas1.style.maxWidth = '800px';
-        canvas1.style.maxHeight = '600px';
-        ctx1.drawImage(img1, 0, 0);
-        PixelsImage_image_a_cacher = ctx1.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-		canvas1.style.borderStyle="ridge ridge ridge ridge" ;
-        ctx1.putImageData(PixelsImage_image_a_cacher, 0, 0);
-		
-
-		
+      var reader = new FileReader();
+      reader.onload = function(e)
+      {
+        var img = new Image();
+        img.src = e.target.result;
+        img.onload = function()
+        {
+          ctx.canvas.width = img.width;
+          ctx.canvas.height = img.height;
+          canvas.style.maxWidth = '800px';
+          canvas.style.maxHeight = '600px';
+          ctx.drawImage(img, 0, 0);
+          PixelsImage = ctx.getImageData(0, 0, img.width, img.height);
+          canvas.style.borderStyle="ridge ridge ridge ridge" ;
+          ctx.putImageData(PixelsImage, 0, 0);
+        }
+      };
+      reader.readAsDataURL(file);
+      
     }
-};
-        reader.readAsDataURL(file);
-    
+  Etape ++
+
   }
-Etape ++
-}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function go () {
-    if (choix == 1) {
-    for ( x = 0; x < PixelsImage.width; x += 1 ) {
-        for ( y = 0; y < PixelsImage.height; y+= 1) {
-            for ( z = 0; z < 4; z +=1 ){
- 
-                let pos = ((x * PixelsImage.height) + y ) * 4 + z
- 
-                var pixel = PixelsImage.data[pos]
-                var pixelCache = PixelsImage_image_a_cacher.data[pos] || 0
- 
-
-                var hPixel = (pixel & 0b11110000)
- 
-                var lPixel = (pixelCache >>> 4)
-
-
-                var newPixel = hPixel | lPixel
-                PixelsImage.data[pos] = newPixel
-             
-            }
-        }
-    }
-    ctx.putImageData(PixelsImage,0,0);
-	Etape_2 ()
- }
-
-
-else {
-
-  for ( x = 0; x < PixelsImage.width; x++ ) {
-            for ( y = 0; y < PixelsImage.height; y++) {
- 
-                let pos = ((y * PixelsImage.width) + x) * 4
- 
-                // posCache est la position x y relatif a l'image a caché
-                // si la position est hors de l'image, elle faudra -1
-                let posCache = -1
-                if( x < PixelsImage_image_a_cacher.width && y < PixelsImage_image_a_cacher.height) {
-                    posCache = ((y * PixelsImage_image_a_cacher.width) + x) * 4
-                }
- 
-                for ( z = 0; z < 3; z +=1 ){
+  function onChange1(sender)
+  {
      
-                    let pixel = PixelsImage.data[pos + z]
-                    let pixelCache = posCache === -1 ? 0 : PixelsImage_image_a_cacher.data[posCache + z]
- 
-                    let hPixel = (pixel & 0b11111000)
-                    let lPixel = ((pixelCache & 0b01110000) >>> 4 )
- 
-                    PixelsImage.data[pos + z] = hPixel | lPixel
-                 
-                }
-                 
-                let alpha = PixelsImage.data[pos + 3] & 0b11111000
-                if ( posCache !== -1 ){
-                    for ( z = 0; z < 3; z++  ){
-                        alpha |= ((PixelsImage_image_a_cacher.data[posCache + z] || 0 ) & 0b10000000) >>> (5+z)
-                    }
-                }
-                PixelsImage.data[pos+3] = alpha
-                 
-            }
-        }
-        ctx.putImageData(PixelsImage,0,0);
-Etape_2 ()
+  	
+  	var file = sender.files[0];
+      var fileType = file["type"];
+      if(allowedTypes.indexOf(fileType) == -1)
+      {
+          alert("Format du fichier invalide. Les formats acceptés sont : gif, jpeg, png. ");
+      }
+      else
+      {
+          var reader = new FileReader();
+          reader.onload = function(e)
+  {
+      var img1 = new Image();
+      img1.src = e.target.result
+      img1.onload = function()
+      {
+
+          canvas1.width = img1.width;
+          canvas1.height = img1.height;
+          canvas1.style.maxWidth = '800px';
+          canvas1.style.maxHeight = '600px';
+          ctx1.drawImage(img1, 0, 0);
+          PixelsImage_image_a_cacher = ctx1.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+  		canvas1.style.borderStyle="ridge ridge ridge ridge" ;
+          ctx1.putImageData(PixelsImage_image_a_cacher, 0, 0);
+  		
+
+  		
+      }
+  };
+          reader.readAsDataURL(file);
+      
+    }
+  Etape ++
+  }
 
 
 
-}
-}
 
 
 
-</script>
-</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function go () {
+      if (choix == 1) {
+      for ( x = 0; x < PixelsImage.width; x += 1 ) {
+          for ( y = 0; y < PixelsImage.height; y+= 1) {
+              for ( z = 0; z < 4; z +=1 ){
+   
+                  let pos = ((x * PixelsImage.height) + y ) * 4 + z
+   
+                  var pixel = PixelsImage.data[pos]
+                  var pixelCache = PixelsImage_image_a_cacher.data[pos] || 0
+   
+
+                  var hPixel = (pixel & 0b11110000)
+   
+                  var lPixel = (pixelCache >>> 4)
+
+
+                  var newPixel = hPixel | lPixel
+                  PixelsImage.data[pos] = newPixel
+               
+              }
+          }
+      }
+      ctx.putImageData(PixelsImage,0,0);
+  	Etape_2 ()
+   }
+
+
+  else {
+
+    for ( x = 0; x < PixelsImage.width; x++ ) {
+              for ( y = 0; y < PixelsImage.height; y++) {
+   
+                  let pos = ((y * PixelsImage.width) + x) * 4
+   
+                  // posCache est la position x y relatif a l'image a caché
+                  // si la position est hors de l'image, elle faudra -1
+                  let posCache = -1
+                  if( x < PixelsImage_image_a_cacher.width && y < PixelsImage_image_a_cacher.height) {
+                      posCache = ((y * PixelsImage_image_a_cacher.width) + x) * 4
+                  }
+   
+                  for ( z = 0; z < 3; z +=1 ){
+       
+                      let pixel = PixelsImage.data[pos + z]
+                      let pixelCache = posCache === -1 ? 0 : PixelsImage_image_a_cacher.data[posCache + z]
+   
+                      let hPixel = (pixel & 0b11111000)
+                      let lPixel = ((pixelCache & 0b01110000) >>> 4 )
+   
+                      PixelsImage.data[pos + z] = hPixel | lPixel
+                   
+                  }
+                   
+                  let alpha = PixelsImage.data[pos + 3] & 0b11111000
+                  if ( posCache !== -1 ){
+                      for ( z = 0; z < 3; z++  ){
+                          alpha |= ((PixelsImage_image_a_cacher.data[posCache + z] || 0 ) & 0b10000000) >>> (5+z)
+                      }
+                  }
+                  PixelsImage.data[pos+3] = alpha
+                   
+              }
+          }
+          ctx.putImageData(PixelsImage,0,0);
+  Etape_2 ()
+
+
+
+  }
+  }
+
+
+
+  </script>
+    </body></html>
