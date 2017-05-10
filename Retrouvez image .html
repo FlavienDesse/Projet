@@ -33,7 +33,7 @@
   <h1>
 	<br>
 	<br>
-	Veuillez sélectionner le mode de décryptage     
+	Veuillez sélectionner le mode de dissimulation    
     <select name="Liste" id="choix_id" >
     <option value="1" >Mode 1</option>
     <option value="2" >Mode 2</option> 
@@ -160,23 +160,30 @@ Etape_2()
 
 else {
 
+
 for ( x = 0; x < PixelsImage.width; x += 1 ) {
             for ( y = 0; y < PixelsImage.height; y+= 1) {
  
                 let pos = ((y * PixelsImage.width) + x) * 4
                 let hiBit = []
                 let alphaPixel = PixelsImage.data[pos + 3]
-                for ( z = 0; z < 3; z +=1 ){
+                
+				for ( z = 0; z < 3; z +=1 ){
                     let hb = (alphaPixel << (5 + z)) & 0b10000000
+					//on prend la composante du pixel on la décale de 5 minimum pour le rouge et on garde que la bit le plus ford
                     hiBit.push(hb)
+					//Ca met dans un tableau 3 composantes d'un pixel
                 }
  
                 PixelsImage.data[pos + 3] = 255
  
                 for ( z = 0; z < 3; z +=1 ){
                     let pixel = PixelsImage.data[pos + z]
+					//on récupére la pos de al composante
                     let newPixel = ((pixel & 0b00000111) << 4 ) | hiBit[z]
+					//on pousse tous au fond et on récupérer le bit le plus fort 
                     PixelsImage.data[pos + z] = newPixel
+					//on insére dans l'image
                 }
             }
         }

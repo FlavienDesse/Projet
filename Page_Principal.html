@@ -95,8 +95,9 @@
 
   a = 0
   function_afficher_def_stegano()
+  //on lance la fonction pour afficher une def
   suivante ()
-
+  //la fonction des anedcotes
 
   function suivante () {
   a=a+1
@@ -137,13 +138,16 @@
   a=0
   clearInterval(timer_preparation)
   suivante ()
+  //enléve le timer pour relance la fonction suivante
   }
-
+  
 
   timer_preparation=setTimeout(suivante,15000)
+  //éxécute la fonction suivante toutes les 15s
   }
   function suivante_bouton (){
   clearInterval(timer_preparation)
+  //dés qu'on click sur suivant on enléve le timer et on lit la fonction suivante
   suivante ()
   }
 
@@ -152,7 +156,7 @@
   document.getElementById("titre_fieldset").innerHTML="Stéganographie"
   document.getElementById("texte").innerHTML="La stéganographie est l'art de la dissimulation : son objet est de faire passer inaperçu un message dans un autre message. Elle se distingue de la cryptographie, « art du secret », qui cherche à rendre un message inintelligible à autre que qui de droit. Pour prendre une métaphore, la stéganographie consisterait à enterrer son argent dans son jardin là où la cryptographie consisterait à l'enfermer dans un coffre-fort — cela dit, rien n'empêche de combiner les deux techniques, de même que l'on peut enterrer un coffre dans son jardin."
   }
-
+//les deféfinitions
 
 
 

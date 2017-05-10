@@ -24,7 +24,7 @@
 
  <canvas id="monCanvas" style="display:none;"> </canvas>
 
- <textarea id="texte" rows=10 cols=50 style="display:none;" onchange="LeChangementCMaintenant()">
+ <textarea id="texte" rows=10 cols=50 style="display:none;" onchange="Changer_texte()">
  </textarea >
 
 
@@ -408,7 +408,7 @@ function onChange(sender)
 }
 
 
-function LeChangementCMaintenant () {
+function Changer_texte () {
   texte = document.getElementById("texte").value
 }
 

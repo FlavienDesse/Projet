@@ -14,8 +14,8 @@ function go (){
   var opacite=""
   
 
-   for (x=0 ; x<24 ; x=x+4) {
-    
+   for (x=0 ; x<28 ; x=x+4) {
+    // on repète ceci 24 fois car un message peut se trouver sur 7 bits différents donc faut faire l'oppération 7 fois pour avoir toutes les positions du pixels
 	var espace=0
 	
     var composante_rouge=[]
@@ -74,6 +74,7 @@ else {
   if (espace == 1){
     message_composante_rouge.push("32")
   }
+  //on push 32 car l'espace en ASCII correspond a 32
   espace=0
 }
 }
@@ -83,7 +84,7 @@ else {
   }
   rouge=rouge+mop_r
 
-
+// on vertir les nombres en ASCII en lettre
 
 
 
@@ -327,10 +328,18 @@ var pos = 0
 var finit = "non"
 
 for (let word of mot_construit) {
+	//ca cree la variable word par rapport a mot_construit
   pos = words.indexOf(word)
+  //la ca met la position du mot qui pourrait correspondre a un mot de la langue francaise
   while (count < 50 && finit!= "oui" ) {
-    
-   if ( words.charAt(word.length + pos)==" " && words.charAt(pos-1)==" " ) 
+   //Boucle while qui s'arrête si count < 50
+   //Car par exemple pour la lettre A le nombre
+   //d'occurence est trop longue 
+   //donc j'en met maximumu 50
+   if ( words.charAt(word.length + pos)==" " && words.charAt(pos-1)==" " )
+//En gros dans ma variable avec tous les mots courants
+//de la langue francaise un mot est séparé par des espaces
+//Et là je vérifie cela 	   
    {
      values_v.push(word);
      finit = "oui"

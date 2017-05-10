@@ -163,13 +163,18 @@
      {
       alert("Format du fichier invalide. Les formats acceptés sont : gif, jpeg, png. ");
     }
+	//on vérifie le type 
     else
     {
       var reader = new FileReader();
+	  //le programme lit l'image
       reader.onload = function(e)
+	  //dés qu'elle est chargé
       {
         var img = new Image();
+		//on creé une bouvelle image
         img.src = e.target.result;
+		//on lui donne la source
         img.onload = function()
         {
         ctx.canvas.width = img.width;
@@ -274,17 +279,17 @@ point =2
 document.getElementById("patienter").innerHTML="Veuillez patienter pendant que le programme travaille"
 }
 timerpreparation=setTimeout(affichage,750)
-
+//éxécute la fonction affichage toute les 750ms 
 }
 
  
  
  w=new Worker("message.js")
-
+// on créai le Worker
  if (typeof(w) !== "undefined") {
-
+// in vérifie qu'il est supporté par le navigateur
        w.postMessage(PixelsImage.data);
-       
+       //on envoie la variable PixelsImage/data au worker
      
 
      
@@ -293,7 +298,7 @@ timerpreparation=setTimeout(affichage,750)
      
      
      w.onmessage=function(event){
-
+    // dés que le programme recois un message
         if (reconstitution_worker==8) {
         opacite=event.data
     w.terminate()
@@ -331,7 +336,7 @@ timerpreparation=setTimeout(affichage,750)
         values_r=event.data
     reconstitution_worker=2
     }
-    
+    //restitution de toutes les variables
      
      
    
@@ -368,7 +373,7 @@ function Brute_r (){
 function Simplifier_r (){
 values_r=values_r.toString(); 
   document.getElementById("texte_fin_r").innerHTML =  values_r.replace( /[,]/g , " "); 
-
+//regEx pour remplacer les virgules par du vide
 }
 
 

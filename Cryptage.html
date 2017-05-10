@@ -92,17 +92,18 @@
 
   function crypter () {
 
-
+//Alphabey décalé de 3 lettres vers la droite
   var alphabet  = ["X" , "Y" , "Z" , "A" , "B" , "C" , "D" , "E" , "F", "G" , "H" , "I" , "J", "K" ,"L" ,"M" ,"N" ,"O" ,"P" ,"Q" ,"R" ,"S" ,"T" ,"U" ,"V" ,"W"]
   var melange_alphabet = parseInt(Math.random() * 19) + 5
-
+  // On définie la variable pour mélanger l'aplhabet
 
   for(a=0 ; a < parseInt(melange_alphabet/2) +1  ; a++) {
   let changement = alphabet[a]
   alphabet[a]=alphabet[melange_alphabet-a]
   alphabet[melange_alphabet-a]=changement
   }
-
+//En gros là ca fait A B C D E F G H       H G F E D C B A ca inverse et melange_alphabet correspond aux nombre de lettre mélangé
+//On fait un parseInt  + 1 car si c'est un nombre impaire une lettre au milieu ne va pas être changé
   var texte =[]
   var texte_changer=[]
   var flip = 0
@@ -111,14 +112,14 @@
 
   var texte_string=document.getElementById("texte_crypter").value.toUpperCase()
   texte_string=texte_string.replace(/(\W)/g,"")
-
+// une regEX qui enléve tous ce qui n'est pas des lettres ou chiffre
   for ( a=0 ; a<texte_string.length ;a++) {
   if (isNaN(texte_string.charAt(a))== false ) {
   alert("Votre message ne doit pas contenir de nombre ")
   return;
   }
   }
-
+//vérifie qu'il n'y que des lettres 
 
   for (a=0 ; a<texte_string.length;a++){
   texte.push(texte_string.charAt(a))
@@ -128,7 +129,7 @@
 
 
 
-
+//là on définit les lettres
   let premiere_lettre=alphabet[0]
   let deuxieme_lettre=alphabet[1]
   let troisieme_lettre=alphabet[2]
@@ -159,7 +160,7 @@
 
 
 
-
+//On mélange aléatoirement
   if (flip == 1){
   alphabet[0]=troisieme_lettre
   alphabet[1]=dixieme_lettre
@@ -191,7 +192,7 @@
 
 
 
-
+//on décale de 3
   else if (flip == 3) {
   alphabet[0]=troisieme_lettre
   alphabet[1]=quatrieme_lettre
@@ -221,7 +222,7 @@
   alphabet[25]=deuxieme_lettre
   flip = 0
   }
-
+//on décake de 4
   else {
   alphabet[0]=quatrieme_lettre
   alphabet[1]=cinquieme_lettre
@@ -253,6 +254,9 @@
   }
   flip++
 
+  
+  
+  //Si la première lettre est un A celle ci va prendre la première valeur de l'alphabet
   if (texte[a]=="A") {
   texte_changer.push(alphabet[0])
   }
@@ -337,15 +341,17 @@
 
   }
   cle_cryptage=melange_alphabet +  alphabet[parseInt(Math.random() * 24)] + parseInt(Math.random() * 24)
+  //ce qui après mélange_alphabet sers a rien , c'est juste pour que la clef soit plus imposante
   document.getElementById("cle").style.color="red"
   document.getElementById("cle").innerHTML=cle_cryptage
+  
   for (a=0 ; a<texte_changer.length;a++){
   fin=fin+texte_changer[a]
   }
   document.getElementById("resultat_cryptage").style.color="red"
   document.getElementById("resultat_cryptage").innerHTML=fin
   }
-
+//permet juste de mettre le tableau sous forme de mot et de l'afficher
 
   function Decrypter() {
 
@@ -366,6 +372,7 @@
   else {
   var melange_alphabet = parseInt(cle_cryptage.charAt(0))
   }
+//permet de retrouver la cle de cryptage
 
   for(a=0 ; a < parseInt(melange_alphabet/2) +1  ; a++) {
   let changement = alphabet[a]
@@ -389,7 +396,7 @@
   for (a=0 ; a<texte_string.length;a++){
   texte.push(texte_string.charAt(a))
   }
-
+  //on met le texte sous forme de tableau
   for (a=0 ; a<texte.length ;a++){
 
 
@@ -520,9 +527,9 @@
 
   flip++
   restitution=alphabet.indexOf(texte[p]) 
-
+//restitution contient la position de la lettre
   p++
-
+//là on cherche ou ca concorde , si le position vaut 15 alors forcément ca sera un P
   if (restitution == 0) {
   texte_changer.push("A")
   }
@@ -612,8 +619,9 @@
   }
   document.getElementById("resultat_decryptage").style.color="red"
   document.getElementById("resultat_decryptage").innerHTML=fin
-
   }
+  
+  //On met le texte décrypter sous forme de mot et on l'affiche en rouge
   </script>
   </body>
   </html>

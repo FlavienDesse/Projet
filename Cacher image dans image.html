@@ -33,7 +33,7 @@
     <h1>
 
   	<br>
-  	Veuillez sélectionner le mode de cryptage     
+  	Veuillez sélectionner le mode de dissimulation     
       <select name="Liste" id="choix_id" >
       <option value="1" >Mode 1</option>
       <option value="2"  >Mode 2</option> 
@@ -69,7 +69,7 @@
   var choix
 
   function Quelle_mode_choisir () {
-  alert("Nous vous conseillons le mode 1 , le mode 2 est incomplet")
+  alert("Nous vous conseillons le mode 1 , le mode 2 comporte des soucis pour retrouver l'image")
   }
 
 
@@ -109,7 +109,7 @@
     }
     else   {
       document.getElementById("probleme").style.color="red"
-      document.getElementById("probleme").innerHTML = "Veuillez uploader les images avant"
+      document.getElementById("probleme").innerHTML = "Veuilslez uploader les images avant , sinon recommencé"
     }
   } 
 
@@ -117,13 +117,15 @@
   function onChange(sender)
   {
    
-    
+    //cree un tableau avec les spécificité de l'image
     var file = sender.files[0];
     var fileType = file["type"];
+	//on met le type de l'image dans la variable FyleType
     if(allowedTypes.indexOf(fileType) == -1)
     {
       alert("Format du fichier invalide. Les formats acceptés sont : gif, jpeg, png. ");
     }
+	// On vérifie que c'est une image
     else
     {
       var reader = new FileReader();
@@ -131,6 +133,7 @@
       {
         var img = new Image();
         img.src = e.target.result;
+			  //renvoie la référence à la cible vers laquelle l'évènement était originellement destiné
         img.onload = function()
         {
           ctx.canvas.width = img.width;
@@ -211,21 +214,24 @@
 
   function go () {
       if (choix == 1) {
+	  //correspond au x de l'image
       for ( x = 0; x < PixelsImage.width; x += 1 ) {
           for ( y = 0; y < PixelsImage.height; y+= 1) {
+		  //correspond au y de l'image
               for ( z = 0; z < 4; z +=1 ){
+			  //correspond au composante de l'image
    
                   let pos = ((x * PixelsImage.height) + y ) * 4 + z
-   
+                  //la pos correspond a la composante 
                   var pixel = PixelsImage.data[pos]
                   var pixelCache = PixelsImage_image_a_cacher.data[pos] || 0
    
-
+					// on garde que les bits fort
                   var hPixel = (pixel & 0b11110000)
-   
+					//on décale les bits forts a droite
                   var lPixel = (pixelCache >>> 4)
 
-
+                    //on fusionne les 2
                   var newPixel = hPixel | lPixel
                   PixelsImage.data[pos] = newPixel
                
@@ -245,7 +251,7 @@
                   let pos = ((y * PixelsImage.width) + x) * 4
    
                   // posCache est la position x y relatif a l'image a caché
-                  // si la position est hors de l'image, elle faudra -1
+                  // si la position est hors de l'image, elle vaudra -1
                   let posCache = -1
                   if( x < PixelsImage_image_a_cacher.width && y < PixelsImage_image_a_cacher.height) {
                       posCache = ((y * PixelsImage_image_a_cacher.width) + x) * 4
@@ -254,11 +260,13 @@
                   for ( z = 0; z < 3; z +=1 ){
        
                       let pixel = PixelsImage.data[pos + z]
+					  //Si c'est vrai ca renvoi 0 si c'est faux ca renvoi PixelsImage_image_a_cacher ...
                       let pixelCache = posCache === -1 ? 0 : PixelsImage_image_a_cacher.data[posCache + z]
    
                       let hPixel = (pixel & 0b11111000)
+					  //on garde que les bits de poids fort
                       let lPixel = ((pixelCache & 0b01110000) >>> 4 )
-   
+                      //on décale les bits de poids fort a droite
                       PixelsImage.data[pos + z] = hPixel | lPixel
                    
                   }
@@ -268,6 +276,7 @@
                       for ( z = 0; z < 3; z++  ){
                           alpha |= ((PixelsImage_image_a_cacher.data[posCache + z] || 0 ) & 0b10000000) >>> (5+z)
                       }
+					  //On cache le rouge / vert / bleu 
                   }
                   PixelsImage.data[pos+3] = alpha
                    
